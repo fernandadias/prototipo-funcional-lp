@@ -416,12 +416,6 @@
   .post .post-cta svg{transition:transform .2s}
   .post:hover .post-cta svg{transform:translateX(2px)}
 
-  /* Vídeo de apresentação */
-  .video-apresentacao{padding:40px 0 80px}
-  .video-apresentacao .video-wrap{max-width:960px;margin:0 auto;position:relative;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);background:#000;box-shadow:0 24px 80px rgba(0,0,0,.4)}
-  .video-apresentacao .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
-  .video-apresentacao .video-caption{text-align:center;color:var(--text-mute);font-family:'Kode Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;margin-top:16px}
-
   /* Lista de aulas */
   .post .aulas{list-style:none;padding:12px 0 0;margin:4px 0 0;display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--border);counter-reset:aula}
   .post .aulas li{font-size:12.5px;color:var(--text-dim);line-height:1.45;display:flex;gap:8px;align-items:flex-start}
@@ -585,21 +579,6 @@
   </div>
 </header>
 
-<section id="video-apresentacao" class="video-apresentacao">
-  <div class="container">
-    <div class="video-wrap">
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/-QPU6HGFH58?rel=0&modestbranding=1"
-        title="Protótipo Funcional — vídeo de apresentação"
-        loading="lazy"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen></iframe>
-    </div>
-    <p class="video-caption">Apresentação · 2 min</p>
-  </div>
-</section>
-
 <section id="sobre-o-curso">
   <div class="container">
     <div class="section-head">
@@ -655,7 +634,7 @@
       </div>
       <img class="illustration-logo-img" src="logo-prototipo-funcional-vertical.svg" alt="Protótipo Funcional" />
       <div class="illustration-label">QUANDO CÓDIGO ENTRA NO PROCESSO DE DESIGN</div>
-      <div class="illustration-image" id="introVideo" role="button" tabindex="0" aria-label="Reproduzir vídeo de apresentação" data-video-id="dQw4w9WgXcQ">
+      <div class="illustration-image" id="introVideo" role="button" tabindex="0" aria-label="Reproduzir vídeo de apresentação" data-video-id="-QPU6HGFH58">
         <span class="play-label">Vídeo de apresentação</span>
         <button class="play-btn" type="button" aria-label="Play">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
