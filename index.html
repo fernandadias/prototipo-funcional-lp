@@ -106,7 +106,10 @@
   .cursor.is-play .cursor-svg{opacity:0;transform:scale(0.4);transition:opacity .15s ease,transform .25s ease}
   .cursor.is-play .cursor-play{opacity:1;transform:translate(-50%,-50%) scale(1)}
   body.has-custom-cursor,body.has-custom-cursor *{cursor:none !important}
-  body.has-custom-cursor .illustration-image:hover .play-btn,body.has-custom-cursor .illustration-image:hover .play-label,body.has-custom-cursor .illustration-image:hover .play-duration{opacity:0;visibility:hidden;transition:none}
+  body.has-custom-cursor .illustration-image:hover .play-label,body.has-custom-cursor .illustration-image:hover .play-duration{opacity:0;visibility:hidden;transition:opacity .2s ease,visibility .2s ease}
+  .cursor.is-quiet{opacity:0!important}
+  .illustration-image .play-btn{transition:transform .5s cubic-bezier(.22,.61,.36,1),box-shadow .35s ease}
+  .illustration-image.is-following .play-btn{transition:transform .18s cubic-bezier(.22,.61,.36,1);animation-play-state:paused}
   body.has-custom-cursor .fv-card:hover .fv-expand-ico{opacity:0;visibility:hidden;transition:none}
   @media (hover:none),(prefers-reduced-motion:reduce){.cursor{display:none}}
   /* A11y */
@@ -953,7 +956,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     document.addEventListener('mousedown',()=>cursor.classList.add('is-down'));
     document.addEventListener('mouseup',()=>cursor.classList.remove('is-down'));
     const interactiveSel='a,button,[role="button"],.faq-q,label,input,textarea,select,summary';
-    const playSel='.illustration-image,.fv-card';
+    const playSel='.fv-card';
     document.addEventListener('mouseover',e=>{
       if(!e.target.closest)return;
       const playEl=e.target.closest(playSel);
@@ -970,6 +973,29 @@ document.addEventListener('DOMContentLoaded',()=>{
       const toInt=to&&to.closest&&to.closest(interactiveSel);
       if(fromInt&&!toInt)cursor.classList.remove('is-hover');
     });
+
+    const introPlayer=document.querySelector('#introVideo');
+    const introPlayBtn=introPlayer&&introPlayer.querySelector('.play-btn');
+    if(introPlayer&&introPlayBtn){
+      let pRaf=null,ptx=0,pty=0;
+      const applyP=()=>{introPlayBtn.style.transform=`translate(${ptx}px,${pty}px)`;pRaf=null};
+      introPlayer.addEventListener('mouseenter',()=>{
+        introPlayer.classList.add('is-following');
+        cursor.classList.add('is-quiet');
+      });
+      introPlayer.addEventListener('mousemove',e=>{
+        const r=introPlayer.getBoundingClientRect();
+        ptx=e.clientX-(r.left+r.width/2);
+        pty=e.clientY-(r.top+r.height/2);
+        if(!pRaf)pRaf=requestAnimationFrame(applyP);
+      });
+      introPlayer.addEventListener('mouseleave',()=>{
+        introPlayer.classList.remove('is-following');
+        cursor.classList.remove('is-quiet');
+        ptx=0;pty=0;
+        introPlayBtn.style.transform='';
+      });
+    }
   }
 
   const navToggle=document.querySelector('.nav-toggle');
