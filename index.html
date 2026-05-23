@@ -416,6 +416,12 @@
   .post .post-cta svg{transition:transform .2s}
   .post:hover .post-cta svg{transform:translateX(2px)}
 
+  /* Vídeo de apresentação */
+  .video-apresentacao{padding:40px 0 80px}
+  .video-apresentacao .video-wrap{max-width:960px;margin:0 auto;position:relative;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);background:#000;box-shadow:0 24px 80px rgba(0,0,0,.4)}
+  .video-apresentacao .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+  .video-apresentacao .video-caption{text-align:center;color:var(--text-mute);font-family:'Kode Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;margin-top:16px}
+
   /* Lista de aulas */
   .post .aulas{list-style:none;padding:12px 0 0;margin:4px 0 0;display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--border);counter-reset:aula}
   .post .aulas li{font-size:12.5px;color:var(--text-dim);line-height:1.45;display:flex;gap:8px;align-items:flex-start}
@@ -579,6 +585,21 @@
   </div>
 </header>
 
+<section id="video-apresentacao" class="video-apresentacao">
+  <div class="container">
+    <div class="video-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/-QPU6HGFH58?rel=0"
+        title="Protótipo Funcional — vídeo de apresentação"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen></iframe>
+    </div>
+    <p class="video-caption">Apresentação · 2 min</p>
+  </div>
+</section>
+
 <section id="sobre-o-curso">
   <div class="container">
     <div class="section-head">
@@ -695,7 +716,7 @@
         <div class="post-meta"><span>MÓDULO 01</span><span class="post-tag is-ready">✓ PRONTO</span></div>
         <div class="post-thumb"><img src="thumb01.png" alt="" width="1280" height="720" loading="lazy"/></div>
         <h3>Princípios e framework</h3>
-        <p>Antes de tocar em qualquer ferramenta, você aprende a decidir que tipo de protótipo vale produzir em cada situação. O framework de 5 perguntas que separa quando o Figma resolve, quando o Figma Make resolve, e quando você precisa de código. Os 3 erros que designers cometem ao começar a prototipar com IA — e como o curso te tira deles.</p>
+        <p>Os 4 níveis de protótipo. O framework de decisão das 5 perguntas. Os 3 erros clássicos de quem prototipa com IA.</p>
         <ul class="aulas">
           <li>Por que protótipo estático não basta mais</li>
           <li>Os 4 níveis de protótipo</li>
@@ -708,12 +729,12 @@
         <div class="post-meta"><span>MÓDULO 02</span><span class="post-tag is-ready">✓ PRONTO</span></div>
         <div class="post-thumb"><img src="thumb02.png" alt="" width="1280" height="720" loading="lazy"/></div>
         <h3>Componentes funcionais</h3>
-        <p>Os primeiros componentes funcionais de verdade — sem instalar nada, sem setup técnico, sem terminal. Você vai pegar uma tela do Figma e transformá-la em três tipos de componente que dão dor de cabeça pra prototipar do jeito antigo: uma tabela complexa com sort e filtro, uma UI com arrastar e soltar, e um motion com feedback dinâmico. Tudo dentro do Figma Make e discutindo outras ferramentas que funcionam para esse caso de uso. O ponto: ferramentas opinativas resolvem 70% do trabalho de prototipagem se você souber pedir direito.</p>
+        <p>Tabela complexa, drag-and-drop, motion com feedback. Tudo no Figma Make. Do zero até um componente funcional.</p>
         <ul class="aulas">
           <li>Panorama das ferramentas opinativas</li>
-          <li>Componente 1: tabela complexa</li>
-          <li>Componente 2: UI de arrastar</li>
-          <li>Componente 3: motion com feedback dinâmico</li>
+          <li>Componente 1: tabela com filtros</li>
+          <li>Componente 2: drag and drop</li>
+          <li>Componente 3: feedback dinâmico</li>
         </ul>
         <a href="#" class="post-cta">Assistir a introdução <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
@@ -721,9 +742,8 @@
         <div class="post-meta"><span>MÓDULO 03</span><span class="post-tag is-producing">EM PRODUÇÃO</span></div>
         <div class="post-thumb"><img src="thumb03.png" alt="" width="1280" height="720" loading="lazy"/></div>
         <h3>Fluxos completos com agentes de código</h3>
-        <p>Agora o salto: do componente isolado pra um fluxo inteiro com consistência de estados e dados. Aqui você sai do Figma Make e entra no Claude Code — o agente de código que constrói experiências que ferramentas opinativas não conseguem entregar. Setup do ambiente em uma aula, depois você implementa estado em três níveis (memória do componente, sessão do navegador, banco de dados real com Supabase) e amarra tudo num fluxo navegável.</p>
+        <p>Agora vamos usar agentes de código e criar jornadas inteiras. Estado em três níveis: memória, sessão e banco. Quando subir cada degrau sem virar overengineering.</p>
         <ul class="aulas">
-          <li>Por que sair do Figma Make</li>
           <li>Setup do ambiente</li>
           <li>O repositório base e a primeira tela</li>
           <li>Estado na memória: useState e useReducer</li>
@@ -736,7 +756,7 @@
         <div class="post-meta"><span>MÓDULO 04</span><span class="post-tag is-producing">EM PRODUÇÃO</span></div>
         <div class="post-thumb"></div>
         <h3>Dados de teste e estados visuais</h3>
-        <p>O módulo que separa protótipo amador de protótipo brabo mesmo. Você vai gerar dados realistas com formato brasileiro (CPFs válidos, valores em reais, nomes BR), simular APIs sem ter backend, e construir duas peças que mudam totalmente o jogo do upstream: um admin interno pra criar perfis de teste (essencial pra testes com usuário) e um overlay de chaveamento de estados visuais que permite alternar entre vazio, cheio, loading e erro com 1 clique, sem mexer no código. Quando o protótipo reage à diversidade de dados, a conversa com o time e com os usuários muda de patamar.</p>
+        <p>Faker.js com dados BR. Admin pra criar perfis de teste. Overlay que troca entre vazio, cheio, loading e erro com um clique.</p>
         <ul class="aulas">
           <li>Por que dado mock importa</li>
           <li>Faker.js: dados realistas em escala</li>
@@ -750,10 +770,10 @@
         <div class="post-meta"><span>MÓDULO 05</span><span class="post-tag is-next">PRÓXIMO</span></div>
         <div class="post-thumb"></div>
         <h3>Features de IA e integrações</h3>
-        <p>Como projetar e implementar uma feature de IA de verdade — não um botão "✨" decorativo. Você vai integrar Claude ou OpenAI no seu protótipo com streaming, custo controlado e fallback pra quando falhar, e vai consumir pelo menos uma API REST externa (CEP, dados públicos, qualquer integração relevante pro seu produto). Por trás de tudo, os padrões de UX para IA generativa que diferenciam feature útil de experiências fake.</p>
+        <p>Chamar Claude ou OpenAI direto do protótipo. Streaming, custo, fallback. APIs públicas como ViaCEP. Pensar features de IA e não telas de IA.</p>
         <ul class="aulas">
           <li>Features de IA, não telas de IA</li>
-          <li>Chamando Claude API: primeiro contato</li>
+          <li>LLM API: criando uma feature de IA que funciona</li>
           <li>Streaming: por que importa e como implementar</li>
           <li>Custo, rate limit, fallback</li>
           <li>Integrando uma API REST pública</li>
@@ -765,7 +785,7 @@
         <div class="post-meta"><span>MÓDULO 06</span><span class="post-tag is-next">PRÓXIMO</span></div>
         <div class="post-thumb"></div>
         <h3>Build, deploy e mobile</h3>
-        <p>O fechamento. Você otimiza o build, publica em URL pública e — a feature favorita — gera um QR code que conecta com o admin de perfis do Módulo 4. Em apresentações e testes com usuário, isso muda o jogo: você cria o perfil de teste, gera o QR, a pessoa escaneia no próprio celular e já entra com o cenário certo. Sem instalar, sem login, sem configuração. Fecha o curso com o protótipo final apresentado pra um stakeholder real e um case study (escrito + Loom de processo) pronto pra portfólio.</p>
+        <p>Protótipo em produção em 5 min. QR code com perfil de teste embutido. Responsive sem dor. Documentação do caso de uso do curso.</p>
         <ul class="aulas">
           <li>Build local e otimização</li>
           <li>Deploy na Vercel</li>
