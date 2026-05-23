@@ -84,12 +84,12 @@
     "courseWorkload": "PT12H"
   },
   "syllabusSections": [
-    {"@type":"Syllabus","name":"Módulo 01 — Quando vale construir"},
-    {"@type":"Syllabus","name":"Módulo 02 — Da tela ao código"},
-    {"@type":"Syllabus","name":"Módulo 03 — Estados e dados"},
-    {"@type":"Syllabus","name":"Módulo 04 — Mocks que mentem bem"},
-    {"@type":"Syllabus","name":"Módulo 05 — Integração: LLMs e APIs"},
-    {"@type":"Syllabus","name":"Módulo 06 — Deploy e mobile"}
+    {"@type":"Syllabus","name":"Módulo 1 — Princípios e framework"},
+    {"@type":"Syllabus","name":"Módulo 2 — Componentes funcionais"},
+    {"@type":"Syllabus","name":"Módulo 3 — Fluxos completos com agentes de código"},
+    {"@type":"Syllabus","name":"Módulo 4 — Dados de teste e estados visuais"},
+    {"@type":"Syllabus","name":"Módulo 5 — Features de IA e integrações"},
+    {"@type":"Syllabus","name":"Módulo 6 — Build, deploy e mobile"}
   ]
 }
 </script>
@@ -416,21 +416,10 @@
   .post .post-cta svg{transition:transform .2s}
   .post:hover .post-cta svg{transform:translateX(2px)}
 
-  /* Lista de aulas (variação aberta) */
-  .post .aulas{list-style:none;padding:0;margin:4px 0 0;display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--border);padding-top:12px}
+  /* Lista de aulas */
+  .post .aulas{list-style:none;padding:12px 0 0;margin:4px 0 0;display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--border);counter-reset:aula}
   .post .aulas li{font-size:12.5px;color:var(--text-dim);line-height:1.45;display:flex;gap:8px;align-items:flex-start}
   .post .aulas li::before{content:counter(aula,decimal-leading-zero);counter-increment:aula;font-family:'Kode Mono',monospace;font-size:10px;color:var(--text-mute);letter-spacing:0.06em;padding-top:2px;min-width:18px}
-  .post .aulas{counter-reset:aula}
-
-  /* Lista de aulas (variação colapsada com CTA) */
-  .post details.aulas-toggle{margin-top:auto;border-top:1px solid var(--border);padding-top:14px}
-  .post details.aulas-toggle summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-family:'Kode Mono',monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;font-weight:600;color:var(--accent)}
-  .post details.aulas-toggle summary::-webkit-details-marker{display:none}
-  .post details.aulas-toggle summary .chev{transition:transform .2s}
-  .post details.aulas-toggle[open] summary .chev{transform:rotate(90deg)}
-  .post details.aulas-toggle[open] summary .label-fechado,
-  .post details.aulas-toggle:not([open]) summary .label-aberto{display:none}
-  .post details.aulas-toggle .aulas{margin-top:12px;border-top:none;padding-top:0}
 
   /* FAQ */
   .faq{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
@@ -697,7 +686,7 @@
 <section id="modulos">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow">Currículo · Variação A — aulas visíveis</span>
+      <span class="eyebrow">Currículo</span>
       <h2 style="font-weight:900">Conteúdo planejado</h2>
       <p>Liberação iterativa porque IA muda toda semana. Conforme cada módulo fica pronto, vai pro ar — você acompanha o roadmap em tempo real.</p>
     </div>
@@ -705,79 +694,84 @@
       <div class="post">
         <div class="post-meta"><span>MÓDULO 01</span><span class="post-tag is-ready">✓ PRONTO</span></div>
         <div class="post-thumb"><img src="thumb01.png" alt="" width="1280" height="720" loading="lazy"/></div>
-        <h3>Quando vale construir</h3>
-        <p>Os 4 níveis de protótipo. O framework de decisão das 5 perguntas. Os 3 erros clássicos de quem prototipa com IA.</p>
+        <h3>Princípios e framework</h3>
+        <p>Antes de tocar em qualquer ferramenta, você aprende a decidir que tipo de protótipo vale produzir em cada situação. O framework de 5 perguntas que separa quando o Figma resolve, quando o Figma Make resolve, e quando você precisa de código. Os 3 erros que designers cometem ao começar a prototipar com IA — e como o curso te tira deles.</p>
         <ul class="aulas">
+          <li>Por que protótipo estático não basta mais</li>
           <li>Os 4 níveis de protótipo</li>
-          <li>Framework das 5 perguntas</li>
-          <li>Os 3 erros clássicos com IA</li>
-          <li>Escolhendo o protótipo certo pro problema</li>
+          <li>O framework de decisão</li>
+          <li>Os 3 erros que designers cometem ao prototipar com IA</li>
         </ul>
         <a href="#" class="post-cta">Assistir a introdução <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
       <div class="post">
         <div class="post-meta"><span>MÓDULO 02</span><span class="post-tag is-ready">✓ PRONTO</span></div>
         <div class="post-thumb"><img src="thumb02.png" alt="" width="1280" height="720" loading="lazy"/></div>
-        <h3>Da tela ao código</h3>
-        <p>Setup do ambiente. Boilerplate. Figma Make → Cursor → componente React. Variáveis Figma viram tokens Tailwind.</p>
+        <h3>Componentes funcionais</h3>
+        <p>Os primeiros componentes funcionais de verdade — sem instalar nada, sem setup técnico, sem terminal. Você vai pegar uma tela do Figma e transformá-la em três tipos de componente que dão dor de cabeça pra prototipar do jeito antigo: uma tabela complexa com sort e filtro, uma UI com arrastar e soltar, e um motion com feedback dinâmico. Tudo dentro do Figma Make e discutindo outras ferramentas que funcionam para esse caso de uso. O ponto: ferramentas opinativas resolvem 70% do trabalho de prototipagem se você souber pedir direito.</p>
         <ul class="aulas">
-          <li>Setup do ambiente (Cursor + Node + Git)</li>
-          <li>Boilerplate React + Tailwind</li>
-          <li>Figma Make → Cursor</li>
-          <li>Variáveis Figma viram tokens Tailwind</li>
-          <li>Seu primeiro componente</li>
+          <li>Panorama das ferramentas opinativas</li>
+          <li>Componente 1: tabela complexa</li>
+          <li>Componente 2: UI de arrastar</li>
+          <li>Componente 3: motion com feedback dinâmico</li>
         </ul>
         <a href="#" class="post-cta">Assistir a introdução <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
       <div class="post">
         <div class="post-meta"><span>MÓDULO 03</span><span class="post-tag is-producing">EM PRODUÇÃO</span></div>
         <div class="post-thumb"><img src="thumb03.png" alt="" width="1280" height="720" loading="lazy"/></div>
-        <h3>Estados e dados</h3>
-        <p>useState local. SessionStorage. Supabase como banco real. Quando subir cada degrau sem virar overengineering.</p>
+        <h3>Fluxos completos com agentes de código</h3>
+        <p>Agora o salto: do componente isolado pra um fluxo inteiro com consistência de estados e dados. Aqui você sai do Figma Make e entra no Claude Code — o agente de código que constrói experiências que ferramentas opinativas não conseguem entregar. Setup do ambiente em uma aula, depois você implementa estado em três níveis (memória do componente, sessão do navegador, banco de dados real com Supabase) e amarra tudo num fluxo navegável.</p>
         <ul class="aulas">
-          <li>useState e quando basta</li>
-          <li>SessionStorage e persistência leve</li>
-          <li>Supabase do zero</li>
-          <li>Quando subir cada degrau sem overengineering</li>
+          <li>Por que sair do Figma Make</li>
+          <li>Setup do ambiente</li>
+          <li>O repositório base e a primeira tela</li>
+          <li>Estado na memória: useState e useReducer</li>
+          <li>Estado na sessão: persistência sem backend</li>
+          <li>Banco de dados real com Supabase</li>
         </ul>
         <span class="post-cta is-disabled">Em breve</span>
       </div>
       <div class="post">
         <div class="post-meta"><span>MÓDULO 04</span><span class="post-tag is-producing">EM PRODUÇÃO</span></div>
         <div class="post-thumb"></div>
-        <h3>Mocks que mentem bem</h3>
-        <p>Faker.js com dados BR (CPFs válidos, valores em reais). Mock Service Worker. Loading, erro e vazio que ninguém testa.</p>
+        <h3>Dados de teste e estados visuais</h3>
+        <p>O módulo que separa protótipo amador de protótipo brabo mesmo. Você vai gerar dados realistas com formato brasileiro (CPFs válidos, valores em reais, nomes BR), simular APIs sem ter backend, e construir duas peças que mudam totalmente o jogo do upstream: um admin interno pra criar perfis de teste (essencial pra testes com usuário) e um overlay de chaveamento de estados visuais que permite alternar entre vazio, cheio, loading e erro com 1 clique, sem mexer no código. Quando o protótipo reage à diversidade de dados, a conversa com o time e com os usuários muda de patamar.</p>
         <ul class="aulas">
-          <li>Faker.js com dados BR</li>
-          <li>Mock Service Worker na prática</li>
-          <li>Estados de loading, erro e vazio</li>
-          <li>Demos que sobrevivem ao usuário real</li>
+          <li>Por que dado mock importa</li>
+          <li>Faker.js: dados realistas em escala</li>
+          <li>Mock Service Worker (MSW): simulando uma API</li>
+          <li>O admin de perfis de teste</li>
+          <li>O overlay de estados visuais</li>
         </ul>
         <span class="post-cta is-disabled">Em breve</span>
       </div>
       <div class="post">
         <div class="post-meta"><span>MÓDULO 05</span><span class="post-tag is-next">PRÓXIMO</span></div>
         <div class="post-thumb"></div>
-        <h3>Integração: LLMs e APIs</h3>
-        <p>Chamar Claude/OpenAI direto do protótipo. Streaming, custo, fallback. Pensar features de IA — não telas de IA.</p>
+        <h3>Features de IA e integrações</h3>
+        <p>Como projetar e implementar uma feature de IA de verdade — não um botão "✨" decorativo. Você vai integrar Claude ou OpenAI no seu protótipo com streaming, custo controlado e fallback pra quando falhar, e vai consumir pelo menos uma API REST externa (CEP, dados públicos, qualquer integração relevante pro seu produto). Por trás de tudo, os padrões de UX para IA generativa que diferenciam feature útil de experiências fake.</p>
         <ul class="aulas">
-          <li>Chamando Claude e OpenAI direto</li>
-          <li>Streaming na interface</li>
-          <li>Custo, latência e fallback</li>
-          <li>Features de IA vs telas de IA</li>
+          <li>Features de IA, não telas de IA</li>
+          <li>Chamando Claude API: primeiro contato</li>
+          <li>Streaming: por que importa e como implementar</li>
+          <li>Custo, rate limit, fallback</li>
+          <li>Integrando uma API REST pública</li>
+          <li>Padrões de UX para features generativas</li>
         </ul>
         <span class="post-cta is-disabled">Em breve</span>
       </div>
       <div class="post">
         <div class="post-meta"><span>MÓDULO 06</span><span class="post-tag is-next">PRÓXIMO</span></div>
         <div class="post-thumb"></div>
-        <h3>Deploy e mobile</h3>
-        <p>Vercel em 5 min. QR code pra celular. Responsive sem dor. Como receber feedback e iterar.</p>
+        <h3>Build, deploy e mobile</h3>
+        <p>O fechamento. Você otimiza o build, publica em URL pública e — a feature favorita — gera um QR code que conecta com o admin de perfis do Módulo 4. Em apresentações e testes com usuário, isso muda o jogo: você cria o perfil de teste, gera o QR, a pessoa escaneia no próprio celular e já entra com o cenário certo. Sem instalar, sem login, sem configuração. Fecha o curso com o protótipo final apresentado pra um stakeholder real e um case study (escrito + Loom de processo) pronto pra portfólio.</p>
         <ul class="aulas">
-          <li>Deploy na Vercel em 5 minutos</li>
-          <li>QR code pra testar no celular</li>
-          <li>Responsivo sem dor</li>
-          <li>Receber feedback e iterar</li>
+          <li>Build local e otimização</li>
+          <li>Deploy na Vercel</li>
+          <li>QR code: protótipo no celular da pessoa</li>
+          <li>Responsive sem dor</li>
+          <li>Apresentação, feedback e case study</li>
         </ul>
         <span class="post-cta is-disabled">Em breve</span>
       </div>
@@ -785,114 +779,6 @@
   </div>
 </section>
 
-<section id="modulos-v2" style="padding-top:0">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">Currículo · Variação B — aulas atrás de CTA</span>
-      <h2 style="font-weight:900">Conteúdo planejado</h2>
-      <p>Mesma listagem, mas as aulas ficam escondidas até a pessoa clicar — card respira mais, foco fica no título e na thumb.</p>
-    </div>
-    <div class="blog">
-      <div class="post">
-        <div class="post-meta"><span>MÓDULO 01</span><span class="post-tag is-ready">✓ PRONTO</span></div>
-        <div class="post-thumb"><img src="thumb01.png" alt="" width="1280" height="720" loading="lazy"/></div>
-        <h3>Quando vale construir</h3>
-        <p>Os 4 níveis de protótipo. O framework de decisão das 5 perguntas. Os 3 erros clássicos de quem prototipa com IA.</p>
-        <details class="aulas-toggle">
-          <summary><span class="chev">›</span><span class="label-fechado">Ver aulas (4)</span><span class="label-aberto">Esconder aulas</span></summary>
-          <ul class="aulas">
-            <li>Os 4 níveis de protótipo</li>
-            <li>Framework das 5 perguntas</li>
-            <li>Os 3 erros clássicos com IA</li>
-            <li>Escolhendo o protótipo certo pro problema</li>
-          </ul>
-        </details>
-        <a href="#" class="post-cta">Assistir a introdução <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
-      <div class="post">
-        <div class="post-meta"><span>MÓDULO 02</span><span class="post-tag is-ready">✓ PRONTO</span></div>
-        <div class="post-thumb"><img src="thumb02.png" alt="" width="1280" height="720" loading="lazy"/></div>
-        <h3>Da tela ao código</h3>
-        <p>Setup do ambiente. Boilerplate. Figma Make → Cursor → componente React. Variáveis Figma viram tokens Tailwind.</p>
-        <details class="aulas-toggle">
-          <summary><span class="chev">›</span><span class="label-fechado">Ver aulas (5)</span><span class="label-aberto">Esconder aulas</span></summary>
-          <ul class="aulas">
-            <li>Setup do ambiente (Cursor + Node + Git)</li>
-            <li>Boilerplate React + Tailwind</li>
-            <li>Figma Make → Cursor</li>
-            <li>Variáveis Figma viram tokens Tailwind</li>
-            <li>Seu primeiro componente</li>
-          </ul>
-        </details>
-        <a href="#" class="post-cta">Assistir a introdução <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
-      <div class="post">
-        <div class="post-meta"><span>MÓDULO 03</span><span class="post-tag is-producing">EM PRODUÇÃO</span></div>
-        <div class="post-thumb"><img src="thumb03.png" alt="" width="1280" height="720" loading="lazy"/></div>
-        <h3>Estados e dados</h3>
-        <p>useState local. SessionStorage. Supabase como banco real. Quando subir cada degrau sem virar overengineering.</p>
-        <details class="aulas-toggle">
-          <summary><span class="chev">›</span><span class="label-fechado">Ver aulas (4)</span><span class="label-aberto">Esconder aulas</span></summary>
-          <ul class="aulas">
-            <li>useState e quando basta</li>
-            <li>SessionStorage e persistência leve</li>
-            <li>Supabase do zero</li>
-            <li>Quando subir cada degrau sem overengineering</li>
-          </ul>
-        </details>
-        <span class="post-cta is-disabled">Em breve</span>
-      </div>
-      <div class="post">
-        <div class="post-meta"><span>MÓDULO 04</span><span class="post-tag is-producing">EM PRODUÇÃO</span></div>
-        <div class="post-thumb"></div>
-        <h3>Mocks que mentem bem</h3>
-        <p>Faker.js com dados BR (CPFs válidos, valores em reais). Mock Service Worker. Loading, erro e vazio que ninguém testa.</p>
-        <details class="aulas-toggle">
-          <summary><span class="chev">›</span><span class="label-fechado">Ver aulas (4)</span><span class="label-aberto">Esconder aulas</span></summary>
-          <ul class="aulas">
-            <li>Faker.js com dados BR</li>
-            <li>Mock Service Worker na prática</li>
-            <li>Estados de loading, erro e vazio</li>
-            <li>Demos que sobrevivem ao usuário real</li>
-          </ul>
-        </details>
-        <span class="post-cta is-disabled">Em breve</span>
-      </div>
-      <div class="post">
-        <div class="post-meta"><span>MÓDULO 05</span><span class="post-tag is-next">PRÓXIMO</span></div>
-        <div class="post-thumb"></div>
-        <h3>Integração: LLMs e APIs</h3>
-        <p>Chamar Claude/OpenAI direto do protótipo. Streaming, custo, fallback. Pensar features de IA — não telas de IA.</p>
-        <details class="aulas-toggle">
-          <summary><span class="chev">›</span><span class="label-fechado">Ver aulas (4)</span><span class="label-aberto">Esconder aulas</span></summary>
-          <ul class="aulas">
-            <li>Chamando Claude e OpenAI direto</li>
-            <li>Streaming na interface</li>
-            <li>Custo, latência e fallback</li>
-            <li>Features de IA vs telas de IA</li>
-          </ul>
-        </details>
-        <span class="post-cta is-disabled">Em breve</span>
-      </div>
-      <div class="post">
-        <div class="post-meta"><span>MÓDULO 06</span><span class="post-tag is-next">PRÓXIMO</span></div>
-        <div class="post-thumb"></div>
-        <h3>Deploy e mobile</h3>
-        <p>Vercel em 5 min. QR code pra celular. Responsive sem dor. Como receber feedback e iterar.</p>
-        <details class="aulas-toggle">
-          <summary><span class="chev">›</span><span class="label-fechado">Ver aulas (4)</span><span class="label-aberto">Esconder aulas</span></summary>
-          <ul class="aulas">
-            <li>Deploy na Vercel em 5 minutos</li>
-            <li>QR code pra testar no celular</li>
-            <li>Responsivo sem dor</li>
-            <li>Receber feedback e iterar</li>
-          </ul>
-        </details>
-        <span class="post-cta is-disabled">Em breve</span>
-      </div>
-    </div>
-  </div>
-</section>
 
 <section id="quem-faz">
   <div class="container">
