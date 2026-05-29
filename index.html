@@ -54,7 +54,7 @@
   "image": "https://prototipofuncional.com.br/og-image.jpg",
   "provider": {
     "@type": "Organization",
-    "name": "Laboratório Design IA",
+    "name": "Laboratório DesignIA",
     "url": "https://prototipofuncional.com.br/"
   },
   "instructor": {
@@ -131,7 +131,7 @@
     --text:#f0e7da;
     --text-cream:#e9e0d1;
     --text-dim:#ccbd9f;
-    --text-mute:#635d54;
+    --text-mute:#9c9180;
     --accent:#D4F542;
     --accent-bright:#DFFA5C;
     --accent-dim:#B8D930;
@@ -252,6 +252,10 @@
   @media (prefers-reduced-motion: reduce){
     .illustration-arrows{clip-path:none;-webkit-clip-path:none}
     .illustration-arrows .line-tip,.illustration-logo-img{opacity:1;transform:none}
+    .marquee-track,.eyebrow::before,.illustration-image .play-btn,.fv-bubble,.about-photo::before,.about-photo::after{animation:none !important}
+    .hl{transition:none}
+    .hl.is-on{background-size:100% 100%;color:var(--bg)}
+    *,*::before,*::after{transition-duration:0.01ms !important;animation-duration:0.01ms !important;animation-iteration-count:1 !important;scroll-behavior:auto !important}
   }
   .illustration-label{font-family:'Kode Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-dim);margin-top:18px}
   .illustration-image{width:100%;max-width:880px;aspect-ratio:16/9;border-radius:var(--radius);background:linear-gradient(135deg,#1a1a18 0%,#0a0a0a 50%,#16140e 100%);position:relative;overflow:hidden;border:1px solid var(--border);margin-top:32px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .25s ease, border-color .25s ease}
@@ -266,6 +270,33 @@
   .illustration-image .play-label{position:absolute;z-index:2;bottom:24px;left:24px;font-family:'Kode Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-dim)}
   .illustration-image .play-duration{position:absolute;z-index:2;bottom:24px;right:24px;font-family:'Kode Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-mute)}
   @keyframes playPulse{0%,100%{box-shadow:0 14px 40px rgba(212,245,66,0.25),0 0 0 0 rgba(212,245,66,0.5)}70%{box-shadow:0 14px 40px rgba(212,245,66,0.25),0 0 0 18px rgba(212,245,66,0)}}
+  /* Lead modal */
+  .lead-modal{position:fixed;inset:0;z-index:130;background:rgba(0,0,0,0);backdrop-filter:blur(0);-webkit-backdrop-filter:blur(0);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .45s ease,visibility 0s linear .45s,background .45s ease,backdrop-filter .45s ease,-webkit-backdrop-filter .45s ease}
+  .lead-modal[hidden]{display:flex}
+  .lead-modal.open{opacity:1;visibility:visible;pointer-events:auto;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:opacity .45s ease,visibility 0s linear 0s,background .45s ease,backdrop-filter .45s ease,-webkit-backdrop-filter .45s ease}
+  .lead-modal-card{position:relative;width:100%;max-width:460px;background:var(--bg-card);border:1px solid var(--border-light);border-radius:16px;padding:32px;box-shadow:0 24px 80px rgba(0,0,0,0.6);max-height:calc(100vh - 48px);overflow-y:auto;opacity:0;transform:translateY(16px) scale(0.97);transition:opacity .5s cubic-bezier(.22,.61,.36,1),transform .6s cubic-bezier(.22,.61,.36,1)}
+  .lead-modal.open .lead-modal-card{opacity:1;transform:translateY(0) scale(1)}
+  .lead-modal-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:transparent;color:var(--text-dim);border:1px solid var(--border-light);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;line-height:1;transition:background .2s,color .2s,border-color .2s}
+  .lead-modal-close:hover{background:var(--bg-soft);color:var(--text);border-color:var(--accent)}
+  .lead-modal-card h2{font-size:26px;font-weight:700;letter-spacing:-0.02em;line-height:1.15;margin-bottom:10px;color:var(--text)}
+  .lead-modal-card > p{font-size:14px;color:var(--text-dim);line-height:1.5;margin-bottom:22px}
+  .lead-form{display:flex;flex-direction:column;gap:14px}
+  .lead-form label{display:flex;flex-direction:column;gap:6px}
+  .lead-label{font-family:'Kode Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-dim);display:inline-flex;align-items:baseline;gap:2px}
+  .lead-form .req{color:var(--accent)}
+  .lead-form input{height:46px;padding:0 14px;background:var(--bg-soft);border:1px solid var(--border-light);border-radius:8px;color:var(--text);font-family:'Geist','Inter',sans-serif;font-size:15px;letter-spacing:normal;text-transform:none;transition:border-color .2s,background .2s}
+  .lead-form input:hover{border-color:var(--text-mute)}
+  .lead-form input:focus{outline:none;border-color:var(--accent);background:var(--bg)}
+  .lead-form .lead-submit{margin-top:6px;height:48px;width:100%;font-size:14px}
+  .lead-form .lead-submit:disabled{opacity:.65;cursor:wait;transform:none}
+  .lead-form-err{color:#ff7a7a;font-family:'Kode Mono',monospace;font-size:12px;letter-spacing:0.04em;margin-top:4px}
+  .lead-form-note{font-family:'Kode Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-mute);text-align:center;margin-top:6px;line-height:1.5}
+  @media (max-width:560px){
+    .lead-modal{padding:16px}
+    .lead-modal-card{padding:24px 20px}
+    .lead-modal-card h2{font-size:22px}
+  }
+
   /* Video modal */
   .video-modal{position:fixed;inset:0;z-index:120;background:rgba(0,0,0,0.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:32px;opacity:0;transition:opacity .3s ease}
   .video-modal.open{display:flex;opacity:1}
@@ -283,6 +314,8 @@
   .fv-card{position:relative;width:140px;height:200px;border-radius:16px;overflow:hidden;background:#0a0a0a;cursor:pointer;box-shadow:0 12px 36px rgba(0,0,0,0.45),0 2px 8px rgba(0,0,0,0.3);border:1px solid var(--border-light);transition:width .45s cubic-bezier(.22,.61,.36,1),height .45s cubic-bezier(.22,.61,.36,1),border-radius .45s ease,box-shadow .3s ease}
   .fv-card:hover{transform:none;box-shadow:0 18px 48px rgba(0,0,0,0.55),0 4px 12px rgba(0,0,0,0.4)}
   .fv-card video{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+  .fv-open{position:absolute;inset:0;width:100%;height:100%;padding:0;background:none;border:0;cursor:pointer;display:block}
+  .fv.expanded .fv-open{cursor:default}
   .fv-card .fv-expand-ico{position:absolute;right:10px;bottom:10px;width:22px;height:22px;color:#fff;opacity:.85;pointer-events:none}
   .fv-card .fv-close{position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.55);backdrop-filter:blur(8px);color:#fff;display:none;align-items:center;justify-content:center;cursor:pointer;border:none;z-index:2}
   .fv-card .fv-close:hover{background:rgba(0,0,0,0.8)}
@@ -321,11 +354,27 @@
 
   /* INTEGRATIONS */
   .integrations{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-  .int-card{padding:28px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);min-height:200px;display:flex;flex-direction:column}
-  .int-card h4{font-size:15px;font-weight:900;margin-bottom:4px}
-  .int-card p{margin-bottom:24px}
+  .int-card{--mx:50%;--my:50%;display:flex;position:relative;isolation:isolate;transition:transform .25s ease}
+  .int-card:hover{transform:translateY(8px);animation:int-drop .5s ease}
+  @keyframes int-drop{0%{transform:translateY(0)}55%{transform:translateY(11px)}100%{transform:translateY(8px)}}
+  @media (prefers-reduced-motion:reduce){.int-card:hover{animation:none}}
+  /* A "caixa" opaca — fundo, borda e brilho */
+  .int-card-inner{flex:1;padding:28px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);min-height:200px;display:flex;flex-direction:column;position:relative;z-index:2;isolation:isolate;overflow:hidden;transition:border-color .2s}
+  .int-card-inner::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;background:radial-gradient(320px circle at var(--mx) var(--my),var(--accent),transparent 45%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;opacity:0;transition:opacity .35s ease;pointer-events:none;z-index:2}
+  .int-card-inner::after{content:'';position:absolute;inset:0;border-radius:inherit;background:radial-gradient(420px circle at var(--mx) var(--my),rgba(212,245,66,0.10),transparent 50%);opacity:0;transition:opacity .35s ease;pointer-events:none;z-index:1}
+  .int-card:hover .int-card-inner::before,.int-card:hover .int-card-inner::after{opacity:1}
+  .int-card-inner > *{position:relative;z-index:3}
+  .int-card-inner h4{font-size:15px;font-weight:900;margin-bottom:4px}
+  .int-card-inner p{margin-bottom:24px}
   .int-logos{display:flex;flex-direction:column;gap:12px;margin-top:0}
   .int-logos .brand{margin-right:0;opacity:.85}
+  /* Logos coloridos que emergem por trás da caixa, pelo topo */
+  .int-toplogos{position:absolute;top:0;left:0;right:0;display:flex;justify-content:center;gap:14px;opacity:0;transform:translateY(34px);transition:opacity .4s ease,transform .5s cubic-bezier(.34,1.56,.64,1);pointer-events:none;z-index:1}
+  .int-card:hover .int-toplogos{opacity:1;transform:translateY(-36px)}
+  .int-chip{display:flex;align-items:center;justify-content:center}
+  .int-chip img{width:48px;height:48px;object-fit:contain;display:block;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.45))}
+  .int-chip.is-tint{width:48px;height:48px;background:var(--text);-webkit-mask:var(--logo) center/contain no-repeat;mask:var(--logo) center/contain no-repeat;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.45))}
+  @media (prefers-reduced-motion:reduce){.int-card:hover .int-toplogos{transition:opacity .3s ease}}
   .int-badges{display:flex;gap:8px;justify-content:center;margin-top:28px;flex-wrap:wrap}
   .badge{padding:8px 14px;border:1px solid var(--border-light);border-radius:999px;font-size:12px;color:var(--text-dim);display:inline-flex;align-items:center;gap:6px}
   .badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent)}
@@ -407,8 +456,14 @@
 
   /* BLOG */
   .blog{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  .post{padding:28px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);display:flex;flex-direction:column;gap:14px;transition:border-color .2s,transform .2s}
-  .post:hover{border-color:var(--border-light);transform:translateY(-2px)}
+  .post{--mx:50%;--my:50%;padding:28px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);display:flex;flex-direction:column;gap:14px;transition:border-color .2s,transform .2s;position:relative;isolation:isolate;overflow:hidden}
+  .post:hover{transform:translateY(-2px)}
+  /* Borda iluminada que segue o mouse */
+  .post::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;background:radial-gradient(320px circle at var(--mx) var(--my),var(--accent),transparent 45%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;opacity:0;transition:opacity .35s ease;pointer-events:none;z-index:2}
+  /* Spotlight interno que segue o mouse */
+  .post::after{content:'';position:absolute;inset:0;border-radius:inherit;background:radial-gradient(420px circle at var(--mx) var(--my),rgba(212,245,66,0.10),transparent 50%);opacity:0;transition:opacity .35s ease;pointer-events:none;z-index:1}
+  .post:hover::before,.post:hover::after{opacity:1}
+  .post > *{position:relative;z-index:3}
   .post .post-meta{display:flex;justify-content:space-between;align-items:center;font-family:'Kode Mono',monospace;font-size:11px;color:var(--text-mute);letter-spacing:0.1em;text-transform:uppercase}
   .post .post-tag{font-family:'Kode Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:6px 10px;border-radius:999px;font-weight:600;display:inline-flex;align-items:center;gap:5px;line-height:1}
   .post .post-tag.is-ready{background:var(--accent);color:#1c1c1c;box-shadow:0 0 0 1px rgba(212,245,66,0.4),0 0 18px rgba(212,245,66,0.25)}
@@ -439,8 +494,9 @@
   .faq-q:hover{background:var(--bg-soft)}
   .faq-q .plus{font-size:20px;color:var(--text-dim);transition:transform .25s}
   .faq-item.open .faq-q .plus{transform:rotate(45deg);color:var(--accent)}
-  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease;padding:0 24px;color:var(--text-dim);font-size:14px;line-height:1.6}
-  .faq-item.open .faq-a{max-height:240px;padding:0 24px 22px}
+  .faq-a{display:grid;grid-template-rows:0fr;overflow:hidden;transition:grid-template-rows .3s ease,padding .3s ease;padding:0 24px;color:var(--text-dim);font-size:14px;line-height:1.6}
+  .faq-a > div{min-height:0}
+  .faq-item.open .faq-a{grid-template-rows:1fr;padding:0 24px 22px}
 
   /* CTA FINAL */
   .cta-final{text-align:center;padding:120px 24px;border:1px solid var(--border);border-radius:24px;background:radial-gradient(ellipse at center,rgba(212,245,66,0.06),transparent 60%),var(--bg-soft);margin:80px auto;max-width:var(--max)}
@@ -501,7 +557,7 @@
     .about-photo .photo-bw{display:none}
     .about-photo .photo-color{opacity:1}
     .illustration-image{margin-top:24px}
-    .layer-card,.int-card,.price-card{padding:24px;min-height:auto}
+    .layer-card,.int-card-inner,.price-card{padding:24px;min-height:auto}
     .price-card{padding:28px 20px}
     .price-card .price{font-size:48px}
     .post{padding:20px}
@@ -548,7 +604,7 @@
 </style>
 </head>
 <body>
-<a class="skip-link" href="#hero">Pular para o conteúdo</a>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 <div class="cursor" aria-hidden="true"><span class="cursor-svg"></span><span class="cursor-play"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span><span class="cursor-pause"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></span></div>
 
 <nav class="top">
@@ -565,7 +621,7 @@
   </div>
 </nav>
 
-<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+<div class="mobile-menu" id="mobileMenu" inert>
   <div class="mobile-menu-links">
     <a href="#sobre-o-curso">Sobre</a>
     <a href="#modulos">Módulos</a>
@@ -574,6 +630,7 @@
   </div>
 </div>
 
+<main id="conteudo" tabindex="-1">
 <header class="hero" id="hero">
   <div class="container hero-content">
     <div class="marquee" id="brandMarquee" aria-label="Stack do curso">
@@ -648,9 +705,9 @@
       <div class="illustration-image" id="introVideo" role="button" tabindex="0" aria-label="Reproduzir vídeo de apresentação" data-video-id="-QPU6HGFH58">
         <img class="video-thumb" src="https://i.ytimg.com/vi/-QPU6HGFH58/maxresdefault.jpg" alt="" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/-QPU6HGFH58/hqdefault.jpg'"/>
         <span class="play-label">Vídeo de apresentação</span>
-        <button class="play-btn" type="button" aria-label="Play">
+        <span class="play-btn" aria-hidden="true">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        </button>
+        </span>
         <span class="play-duration">2:14</span>
       </div>
     </div>
@@ -663,25 +720,25 @@
     <div class="section-head">
       <span class="eyebrow">Stack</span>
       <h2 style="font-weight:900;line-height:1">A stack que você vai dominar <span style="font-size:0.5em;font-weight:500;color:var(--text-dim);display:block;letter-spacing:normal;line-height:1.1;margin-top:6px">(sem precisar ter nada instalado hoje)</span></h2>
-      <p>Mantendo sempre atualizado com as novas tecnologias de mercado</p>
+      <p>Sempre atualizada com as novas tecnologias do mercado</p>
     </div>
     <div class="integrations">
-      <div class="int-card">
+      <div class="int-card" data-top='[{"slug":"codex","src":"lobe"},{"slug":"claude","src":"lobe"},{"slug":"git","src":"si"}]'>
         <h4>Ambiente</h4>
         <p style="font-size:13px;color:var(--text-dim);margin-bottom:14px">Onde você escreve e roda código.</p>
         <div class="int-logos" data-stack='[{"name":"Codex","slug":"codex","src":"lobe"},{"name":"Claude Code","slug":"claude","src":"lobe"},{"name":"Git","slug":"git","src":"si"},{"name":"Node","slug":"nodedotjs","src":"si"},{"name":"VS Code","url":"vs-code-logo.svg"}]'></div>
       </div>
-      <div class="int-card">
+      <div class="int-card" data-top='[{"slug":"figma","src":"lobe"},{"slug":"javascript","src":"si"},{"slug":"tailwindcss","src":"si"}]'>
         <h4>Design &amp; Código</h4>
         <p style="font-size:13px;color:var(--text-dim);margin-bottom:14px">Da tela ao componente vivo.</p>
         <div class="int-logos" data-stack='[{"name":"Figma Make","slug":"figma","src":"lobe"},{"name":"HTML","slug":"html5","src":"si"},{"name":"JS","slug":"javascript","src":"si"},{"name":"shadcn/ui","slug":"shadcnui","src":"si"},{"name":"Tailwind","slug":"tailwindcss","src":"si"}]'></div>
       </div>
-      <div class="int-card">
+      <div class="int-card" data-top='[{"slug":"nextdotjs","src":"si","white":true},{"slug":"react","src":"si"},{"slug":"supabase","src":"si"}]'>
         <h4>Dados &amp; Estado</h4>
         <p style="font-size:13px;color:var(--text-dim);margin-bottom:14px">Banco real e mocks que mentem bem.</p>
         <div class="int-logos" data-stack='[{"name":"Next.js","slug":"nextdotjs","src":"si"},{"name":"React","slug":"react","src":"si"},{"name":"Supabase","slug":"supabase","src":"si"},{"name":"Faker.js","slug":"faker","src":"si"},{"name":"MSW","slug":"mockserviceworker","src":"si"}]'></div>
       </div>
-      <div class="int-card">
+      <div class="int-card" data-top='[{"slug":"anthropic","src":"lobe","white":true},{"slug":"openai","src":"lobe","white":true}]'>
         <h4>IA &amp; Deploy</h4>
         <p style="font-size:13px;color:var(--text-dim);margin-bottom:14px">LLM no protótipo + URL pública.</p>
         <div class="int-logos" data-stack='[{"name":"Anthropic API","slug":"anthropic","src":"lobe"},{"name":"OpenAI API","slug":"openai","src":"lobe"},{"name":"Vercel","slug":"vercel","src":"si"},{"name":"Railway","slug":"railway","src":"lobe"}]'></div>
@@ -705,16 +762,18 @@
     <div class="blog">
       <div class="post">
         <div class="post-meta"><span>MÓDULO 01</span><span class="post-tag is-ready">✓ PRONTO</span></div>
-        <div class="post-thumb"><img src="thumb01.png" alt="" width="1280" height="720" loading="lazy"/></div>
+        <div class="post-thumb"><img src="thumb_modulo_01.png" alt="" width="1280" height="720" loading="lazy"/></div>
         <h3>Princípios e framework</h3>
         <p>Os 4 níveis de protótipo. O framework de decisão das 5 perguntas. Os 3 erros clássicos de quem prototipa com IA.</p>
         <ul class="aulas">
-          <li>Por que protótipo estático não basta mais</li>
-          <li>Os 4 níveis de protótipo</li>
-          <li>O framework de decisão</li>
-          <li>Os 3 erros que designers cometem ao prototipar com IA</li>
+          <li>O que são os Protótipos Funcionais</li>
+          <li>Como a história trouxe a gente da máquina até o código</li>
+          <li>Por que usar código para fazer design &amp; não vamos abandonar o Figma</li>
+          <li>Os 4 níveis de protótipos</li>
+          <li>Protótipos Interativos X Protótipos Funcionais</li>
+          <li>4 erros de usar IA no processo de design (que não vamos cometer)</li>
         </ul>
-        <a href="#" class="post-cta">Assistir a introdução <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#introVideo" class="post-cta">Assistir a introdução <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
       <div class="post">
         <div class="post-meta"><span>MÓDULO 02</span><span class="post-tag is-ready">✓ PRONTO</span></div>
@@ -727,7 +786,7 @@
           <li>Componente 2: drag and drop</li>
           <li>Componente 3: feedback dinâmico</li>
         </ul>
-        <a href="#" class="post-cta">Assistir a introdução <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#introVideo" class="post-cta">Assistir a introdução <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
       <div class="post">
         <div class="post-meta"><span>MÓDULO 03</span><span class="post-tag is-producing">EM PRODUÇÃO</span></div>
@@ -805,7 +864,7 @@
         </div>
         <figcaption class="about-photo-caption">
           <span class="caption-name">Nanda Dias</span>
-          <span class="caption-role">Product Design, Cientista de Dados e Especialista em Neurociência</span>
+          <span class="caption-role">Product Designer, Cientista de Dados e Especialista em Neurociência</span>
         </figcaption>
       </div>
       <div class="about-content">
@@ -813,7 +872,7 @@
         <blockquote class="about-quote">Este curso é o que eu queria ter tido quando comecei a prototipar experiências mais complexas.</blockquote>
         <div class="about-body">
           <p>Designer há mais de 15 anos, curiosa por natureza e viciada em entender como as coisas funcionam.</p>
-          <p>Hoje meu foco está em como usar IA pra otimizar o processo de UX/UI e construir as novas experiências e produtos de IA. No <strong>Laboratório Design IA</strong>, meu projeto paralelo, compartilho o que vou aprendendo nesse mar de experimentos.</p>
+          <p>Hoje meu foco está em como usar IA pra otimizar o processo de UX/UI e construir as novas experiências e produtos de IA. No <strong>Laboratório DesignIA</strong>, meu projeto paralelo, compartilho o que vou aprendendo nesse mar de experimentos.</p>
           <p>Esse curso é o destilado dele: tudo que aprendi prototipando de verdade nos últimos anos, organizado num lugar só: como sair do mockup, abrir o editor e entregar na mão do time e dos usuários algo que funciona.</p>
         </div>
         <div class="about-socials">
@@ -835,28 +894,28 @@
     </div>
     <div class="faq">
       <div class="faq-item open">
-        <button class="faq-q">Quando o curso termina de ser produzido?<span class="plus">+</span></button>
-        <div class="faq-a">Previsão de setembro de 2026. Cada módulo vai pro ar conforme é finalizado, com aviso prévio aos alunos. Quem entra no early bird acompanha o roadmap em tempo real.</div>
+        <button class="faq-q" type="button" aria-expanded="true" aria-controls="faq-a-1">Quando o curso termina de ser produzido?<span class="plus" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq-a-1" role="region"><div>Previsão de setembro de 2026. Cada módulo vai pro ar conforme é finalizado, com aviso prévio aos alunos. Quem entra no early bird acompanha o roadmap em tempo real.</div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">Por que liberar iterativamente em vez de tudo de uma vez?<span class="plus">+</span></button>
-        <div class="faq-a">Porque IA muda toda semana. Se eu lançar tudo de uma vez, parte está desatualizada no dia. Liberando em ondas, posso incluir o que aparecer de novo nos módulos seguintes — sem o curso virar peça de museu.</div>
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-2">Por que liberar iterativamente em vez de tudo de uma vez?<span class="plus" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq-a-2" role="region"><div>Porque IA muda toda semana. Se eu lançar tudo de uma vez, parte está desatualizada no dia. Liberando em ondas, posso incluir o que aparecer de novo nos módulos seguintes — sem o curso virar peça de museu.</div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">Eu preciso saber programar?<span class="plus">+</span></button>
-        <div class="faq-a">Não. Mas você precisa estar disposta a aprender. O Módulo 1 te dá a base mental, o Módulo 2 te coloca no ambiente. Se nunca usou terminal, vai ser desconfortável os primeiros 2-3 dias. Depois passa.</div>
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-3">Eu preciso saber programar?<span class="plus" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq-a-3" role="region"><div>Não. Mas você precisa estar disposta a aprender. O Módulo 1 te dá a base mental, o Módulo 2 te coloca no ambiente. Se nunca usou terminal, vai ser desconfortável os primeiros 2-3 dias. Depois passa.</div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">As jam sessions ao vivo são obrigatórias?<span class="plus">+</span></button>
-        <div class="faq-a">Não. São opcionais e ficam gravadas. Mas é onde o aprendizado acelera — você traz seu projeto e recebe feedback ao vivo. Acontecem mensalmente durante o early access.</div>
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-4">As jam sessions ao vivo são obrigatórias?<span class="plus" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq-a-4" role="region"><div>Não. São opcionais e ficam gravadas. Mas é onde o aprendizado acelera — você traz seu projeto e recebe feedback ao vivo. Acontecem mensalmente durante o early access.</div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">O acesso é vitalício?<span class="plus">+</span></button>
-        <div class="faq-a">Sim. Você fica com tudo: aulas, repositórios e gravações dos encontros. Inclusive os módulos liberados depois da sua compra.</div>
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-5">O acesso é vitalício?<span class="plus" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq-a-5" role="region"><div>Sim. Você fica com tudo: aulas, repositórios e gravações dos encontros. Inclusive os módulos liberados depois da sua compra.</div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">Tem política de reembolso?<span class="plus">+</span></button>
-        <div class="faq-a">7 dias após a compra, direto pela Hotmart. Nem precisa justificar.</div>
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-6">Tem política de reembolso?<span class="plus" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq-a-6" role="region"><div>7 dias após a compra, direto pela Hotmart. Nem precisa justificar.</div></div>
       </div>
     </div>
   </div>
@@ -883,8 +942,7 @@
           <li>Comunidade</li>
           <li>Acesso vitalício</li>
         </ul>
-        <!-- TODO: trocar href pela URL real da Hotmart -->
-        <a href="#" class="btn btn-primary" target="_blank" rel="noopener" data-cta="hotmart">Comprar agora</a>
+        <a href="https://pay.hotmart.com/G106003864J?off=u44pgon3" class="btn btn-primary" id="buyBtn" data-cta="hotmart">Comprar agora</a>
         <div class="price-trust">
           <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>7 dias de garantia</span>
           <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>Compra segura</span>
@@ -911,8 +969,9 @@
   <div class="hero-cta">
     <a href="#investimento" class="btn btn-primary">Começar a prototipar</a>
   </div>
-  <p style="margin-top:28px;font-family:'Kode Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#635d54;max-width:560px">Dúvidas, comentários, críticas, sugestões? Bora trocar uma ideias <a href="mailto:contato@prototipofuncional.com.br">contato@prototipofuncional.com.br</a></p>
+  <p style="margin-top:28px;font-family:'Kode Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#635d54;max-width:560px">Dúvidas, comentários, críticas, sugestões? Bora trocar uma ideia <a href="mailto:contato@prototipofuncional.com.br">contato@prototipofuncional.com.br</a></p>
 </div>
+</main>
 
 <footer>
   <div class="container">
@@ -1016,17 +1075,20 @@ document.addEventListener('DOMContentLoaded',()=>{
   if(navToggle&&mobileMenu){
     const openMenu=()=>{
       mobileMenu.classList.add('open');
-      mobileMenu.setAttribute('aria-hidden','false');
+      mobileMenu.removeAttribute('inert');
       navToggle.setAttribute('aria-expanded','true');
       navToggle.setAttribute('aria-label','Fechar menu');
       if(topNav)topNav.classList.add('nav-open');
+      const firstLink=mobileMenu.querySelector('a');
+      if(firstLink)setTimeout(()=>firstLink.focus(),250);
     };
-    const closeMenu=()=>{
+    const closeMenu=({restoreFocus=false}={})=>{
       mobileMenu.classList.remove('open');
-      mobileMenu.setAttribute('aria-hidden','true');
+      mobileMenu.setAttribute('inert','');
       navToggle.setAttribute('aria-expanded','false');
       navToggle.setAttribute('aria-label','Abrir menu');
       if(topNav)topNav.classList.remove('nav-open');
+      if(restoreFocus)navToggle.focus();
     };
     navToggle.addEventListener('click',e=>{
       e.stopPropagation();
@@ -1040,13 +1102,14 @@ document.addEventListener('DOMContentLoaded',()=>{
       closeMenu();
     });
     document.addEventListener('keydown',e=>{
-      if(e.key==='Escape'&&mobileMenu.classList.contains('open'))closeMenu();
+      if(e.key==='Escape'&&mobileMenu.classList.contains('open'))closeMenu({restoreFocus:true});
     });
   }
 
   document.querySelectorAll('.faq-q').forEach(btn=>{
     btn.addEventListener('click',()=>{
-      btn.parentElement.classList.toggle('open');
+      const isOpen=btn.parentElement.classList.toggle('open');
+      btn.setAttribute('aria-expanded',isOpen?'true':'false');
     });
   });
 
@@ -1163,6 +1226,37 @@ document.addEventListener('DOMContentLoaded',()=>{
     }catch(e){}
   });
 
+  const colorOverride={claude:'claude-color',figma:'figma-color',codex:'codex-color'};
+  const brandUrlColor=b=>b.url?b.url:(b.src==='lobe'?`https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg/icons/${colorOverride[b.slug]||b.slug}.svg`:`https://cdn.simpleicons.org/${b.slug}`);
+  document.querySelectorAll('.int-card[data-top]').forEach(card=>{
+    try{
+      const items=JSON.parse(card.dataset.top);
+      // Move o conteúdo atual para a "caixa" opaca
+      const inner=document.createElement('div');
+      inner.className='int-card-inner';
+      while(card.firstChild)inner.appendChild(card.firstChild);
+      // Camada de logos que fica ATRÁS da caixa
+      const wrap=document.createElement('div');
+      wrap.className='int-toplogos';
+      items.forEach(b=>{
+        const chip=document.createElement('span');
+        chip.className='int-chip';
+        if(b.white){
+          chip.classList.add('is-tint');
+          chip.style.setProperty('--logo',`url("${brandUrlColor(b)}")`);
+        }else{
+          const img=document.createElement('img');
+          img.src=brandUrlColor(b);
+          img.alt='';img.width=48;img.height=48;img.decoding='sync';img.loading='lazy';
+          chip.appendChild(img);
+        }
+        wrap.appendChild(chip);
+      });
+      card.appendChild(wrap);   // atrás (z-index 1)
+      card.appendChild(inner);  // caixa por cima (z-index 2)
+    }catch(e){}
+  });
+
   const fv=document.querySelector('#floatingVideo');
   if(fv){
     const card=fv.querySelector('.fv-card');
@@ -1188,11 +1282,6 @@ document.addEventListener('DOMContentLoaded',()=>{
       if(fv.classList.contains('expanded')){collapse();return}
       expand();
     });
-    if(card){
-      card.addEventListener('keydown',e=>{
-        if((e.key==='Enter'||e.key===' ')&&!fv.classList.contains('expanded')){e.preventDefault();expand()}
-      });
-    }
     if(backdrop)backdrop.addEventListener('click',collapse);
     document.addEventListener('keydown',e=>{if(e.key==='Escape'&&fv.classList.contains('expanded'))collapse()});
   }
@@ -1239,6 +1328,97 @@ document.addEventListener('DOMContentLoaded',()=>{
     document.addEventListener('keydown',e=>{if(e.key==='Escape'&&videoModal.classList.contains('open'))closeVideo()});
   }
 
+  // Lead capture modal → Brevo → Hotmart
+  const HOTMART_URL='https://pay.hotmart.com/G106003864J?off=u44pgon3';
+  const BREVO_FORM_URL='';  // TODO: colar aqui a URL do form Brevo (ex: https://sibforms.com/serve/MUIFA...)
+  const leadModal=document.querySelector('#leadModal');
+  const buyBtn=document.querySelector('#buyBtn');
+  const leadForm=document.querySelector('#leadForm');
+  if(leadModal&&buyBtn&&leadForm){
+    const closeBtn=leadModal.querySelector('.lead-modal-close');
+    const errEl=leadForm.querySelector('.lead-form-err');
+    const submitBtn=leadForm.querySelector('.lead-submit');
+    const emailInput=leadForm.querySelector('input[name="email"]');
+    const nameInput=leadForm.querySelector('input[name="name"]');
+    let lastTrigger=null;
+
+    const showError=msg=>{errEl.textContent=msg;errEl.hidden=false};
+    const clearError=()=>{errEl.hidden=true;errEl.textContent=''};
+
+    const openLead=()=>{
+      lastTrigger=document.activeElement;
+      leadModal.classList.add('open');
+      leadModal.setAttribute('aria-hidden','false');
+      document.body.style.overflow='hidden';
+      setTimeout(()=>{(nameInput||emailInput).focus()},260);
+    };
+    const closeLead=()=>{
+      leadModal.classList.remove('open');
+      leadModal.setAttribute('aria-hidden','true');
+      document.body.style.overflow='';
+      clearError();
+      if(lastTrigger&&typeof lastTrigger.focus==='function')lastTrigger.focus();
+    };
+
+    buyBtn.addEventListener('click',e=>{e.preventDefault();openLead()});
+    closeBtn.addEventListener('click',closeLead);
+    leadModal.addEventListener('click',e=>{if(e.target===leadModal)closeLead()});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&leadModal.classList.contains('open'))closeLead()});
+
+    // Foco circular dentro do modal
+    leadModal.addEventListener('keydown',e=>{
+      if(e.key!=='Tab')return;
+      const focusables=leadModal.querySelectorAll('button,input,select,textarea,a[href]');
+      if(!focusables.length)return;
+      const first=focusables[0],last=focusables[focusables.length-1];
+      if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+      else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+    });
+
+    const isValidEmail=v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+    leadForm.addEventListener('submit',async e=>{
+      e.preventDefault();
+      clearError();
+      const data=new FormData(leadForm);
+      const email=(data.get('email')||'').toString().trim();
+      const name=(data.get('name')||'').toString().trim();
+      const phone=(data.get('phone')||'').toString().trim();
+      if(!email){showError('Email é obrigatório');emailInput.focus();return}
+      if(!isValidEmail(email)){showError('Digite um email válido');emailInput.focus();return}
+
+      submitBtn.disabled=true;
+      const originalLabel=submitBtn.textContent;
+      submitBtn.textContent='Enviando...';
+
+      if(BREVO_FORM_URL){
+        try{
+          await fetch(BREVO_FORM_URL,{method:'POST',body:data,mode:'no-cors'});
+        }catch(_){/* não bloqueia o checkout */}
+      }
+
+      const params=new URLSearchParams();
+      params.set('email',email);
+      if(name)params.set('name',name);
+      if(phone)params.set('phonenumber',phone);
+      const sep=HOTMART_URL.includes('?')?'&':'?';
+      window.location.href=HOTMART_URL+sep+params.toString();
+
+      // fallback caso o redirect demore
+      setTimeout(()=>{submitBtn.disabled=false;submitBtn.textContent=originalLabel},4000);
+    });
+  }
+
+  document.querySelectorAll('.post, .int-card').forEach(card=>{
+    let raf=null,mx=0,my=0;
+    const apply=()=>{card.style.setProperty('--mx',mx+'px');card.style.setProperty('--my',my+'px');raf=null};
+    card.addEventListener('pointermove',e=>{
+      const r=card.getBoundingClientRect();
+      mx=e.clientX-r.left;my=e.clientY-r.top;
+      if(!raf)raf=requestAnimationFrame(apply);
+    });
+  });
+
   const illBlock=document.querySelector('.illustration-block');
   if(illBlock){
     const play=()=>illBlock.classList.add('play');
@@ -1255,13 +1435,40 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 <div class="fv" id="floatingVideo">
   <div class="fv-bubble">Hey, designer</div>
-  <div class="fv-card" role="button" tabindex="0" aria-label="Assistir vídeo de apresentação">
-    <video src="https://arete.shadcn.io/video/video-cta.mp4" autoplay muted loop playsinline preload="metadata"></video>
-    <svg class="fv-expand-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-    <button class="fv-close" type="button" aria-label="Fechar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+  <div class="fv-card">
+    <button class="fv-open" type="button" aria-label="Assistir vídeo de apresentação">
+      <video src="lp-me.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      <svg class="fv-expand-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+    </button>
+    <button class="fv-close" type="button" aria-label="Fechar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
   </div>
 </div>
 <div class="fv-backdrop"></div>
+
+<div class="lead-modal" id="leadModal" role="dialog" aria-modal="true" aria-labelledby="leadModalTitle" aria-hidden="true">
+  <div class="lead-modal-card">
+    <button class="lead-modal-close" type="button" aria-label="Fechar">×</button>
+    <h2 id="leadModalTitle">Falta pouco</h2>
+    <p>Deixa seu contato pra eu te avisar sobre as novidades do curso. Depois você segue pro checkout.</p>
+    <form class="lead-form" id="leadForm" novalidate>
+      <label>
+        <span class="lead-label">Nome</span>
+        <input name="name" type="text" autocomplete="name" maxlength="120"/>
+      </label>
+      <label>
+        <span class="lead-label">Email<span class="req" aria-hidden="true">*</span></span>
+        <input name="email" type="email" required autocomplete="email" maxlength="160"/>
+      </label>
+      <label>
+        <span class="lead-label">WhatsApp</span>
+        <input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20"/>
+      </label>
+      <button class="btn btn-primary lead-submit" type="submit">Ir para o checkout</button>
+      <p class="lead-form-err" role="alert" hidden></p>
+      <p class="lead-form-note">Você será redirecionado para a Hotmart</p>
+    </form>
+  </div>
+</div>
 
 <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Vídeo de apresentação">
   <div class="video-modal-stage">
