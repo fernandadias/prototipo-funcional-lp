@@ -115,6 +115,9 @@
   .illustration-image.is-following .play-btn{transition:transform .18s cubic-bezier(.22,.61,.36,1);animation-play-state:paused}
   body.has-custom-cursor .fv-card:hover .fv-expand-ico{opacity:0;visibility:hidden;transition:none}
   @media (hover:none),(prefers-reduced-motion:reduce){.cursor{display:none}}
+  /* Cursor escuro sobre o footer verde */
+  .cursor.is-dark .cursor-svg{filter:brightness(0) drop-shadow(0 2px 6px rgba(0,0,0,0.4))}
+  .cursor.is-dark.is-hover .cursor-svg{filter:brightness(0) drop-shadow(0 2px 9px rgba(0,0,0,0.5))}
   /* A11y */
   .skip-link{position:absolute;left:-9999px;top:0;background:var(--accent);color:#1c1c1c;padding:12px 18px;border-radius:8px;font-family:'Kode Mono',monospace;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;z-index:200;text-decoration:none}
   .skip-link:focus{left:16px;top:16px}
@@ -304,6 +307,37 @@
   .video-modal-stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
   .video-modal-close{position:absolute;top:-46px;right:0;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s ease}
   .video-modal-close:hover{background:rgba(255,255,255,0.16)}
+  /* ===== Modal ambiente de aula (aula gratuita) ===== */
+  .lesson-modal{position:fixed;inset:0;z-index:130;background:rgba(0,0,0,0.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:32px;opacity:0;transition:opacity .3s ease}
+  .lesson-modal.open{display:flex;opacity:1}
+  .lesson-shell{position:relative;width:100%;max-width:1180px;height:min(680px,86vh);background:var(--bg-card);border:1px solid var(--border-light);border-radius:16px;overflow:hidden;display:flex;box-shadow:0 30px 90px rgba(0,0,0,0.6)}
+  .lesson-close{position:absolute;top:14px;right:14px;z-index:5;width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,0.5);color:#fff;border:1px solid rgba(255,255,255,0.16);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s}
+  .lesson-close:hover{background:rgba(0,0,0,0.82)}
+  .lesson-side{width:320px;flex-shrink:0;background:var(--bg-soft);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
+  .lesson-side-head{padding:26px 24px 20px;border-bottom:1px solid var(--border)}
+  .lesson-eyebrow{font-family:'Kode Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent)}
+  .lesson-side-head h3{font-size:18px;font-weight:900;letter-spacing:-0.01em;margin:8px 0 6px;color:var(--text)}
+  .lesson-side-head p{font-family:'Kode Mono',monospace;font-size:11px;letter-spacing:0.06em;color:var(--text-mute);text-transform:uppercase}
+  .lesson-list{list-style:none;margin:0;padding:10px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:4px}
+  .lesson-item{display:flex;align-items:flex-start;gap:12px;padding:12px;border-radius:10px;font-size:13px;line-height:1.35;color:var(--text-dim);transition:background .2s,color .2s}
+  .lesson-item .li-num{font-family:'Kode Mono',monospace;font-size:10px;color:var(--text-mute);min-width:18px;padding-top:2px}
+  .lesson-item .li-title{flex:1}
+  .lesson-item .li-ico{flex-shrink:0;display:flex;align-items:center;justify-content:center;width:20px;height:20px;color:var(--text-mute);margin-top:1px}
+  .lesson-item.is-active{background:rgba(212,245,66,0.12);color:var(--text)}
+  .lesson-item.is-active .li-num,.lesson-item.is-active .li-ico{color:var(--accent)}
+  .lesson-item.is-locked .li-title{opacity:.65}
+  .lesson-side-foot{padding:18px 20px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:14px}
+  .lesson-side-foot .lf-note{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--text-mute);line-height:1.4}
+  .lesson-side-foot .lf-note svg{flex-shrink:0;margin-top:1px}
+  .lesson-side-foot .btn{padding:11px 16px;font-size:12px;justify-content:center}
+  .lesson-main{flex:1;display:flex;flex-direction:column;min-width:0;background:#000}
+  .lesson-stage{position:relative;flex:1;background:#000;min-height:0}
+  .lesson-stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .lesson-bar{flex-shrink:0;background:var(--bg-card);border-top:1px solid var(--border);padding:14px 22px;display:flex;align-items:center;gap:12px}
+  .lesson-bar strong{font-size:14px;font-weight:600;color:var(--text)}
+  .free-badge{font-family:'Kode Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;background:var(--accent);color:#1c1c1c;padding:4px 9px;border-radius:999px;font-weight:700;white-space:nowrap}
+  .lesson-mhead{display:none}
+  @media (max-width:720px){.lesson-modal{padding:12px}.lesson-shell{flex-direction:column;height:min(88vh,780px)}.lesson-mhead{display:flex;order:-2;align-items:center;width:100%;flex:0 0 auto;padding:16px 56px 16px 20px;background:var(--bg-card);border-bottom:1px solid var(--border)}.lesson-mhead-title{font-family:'Kode Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.lesson-main{order:-1;flex:0 0 auto;min-height:0}.lesson-stage{flex:none;aspect-ratio:16/9}.lesson-side{order:0;width:100%;flex:1 1 auto;min-height:0;border-right:none;border-top:1px solid var(--border)}}
 
   /* WORKFLOW */
   .workflow{background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius);padding:48px;margin-top:48px}
@@ -481,7 +515,7 @@
   .post:hover .post-cta svg{transform:translateX(2px)}
 
   /* Lista de aulas */
-  .post .aulas{list-style:none;padding:12px 0 0;margin:4px 0 0;display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--border);counter-reset:aula}
+  .post .aulas{list-style:none;padding:0;margin:-8px 0 0;display:flex;flex-direction:column;gap:6px;counter-reset:aula}
   .post .aulas li{font-size:12.5px;color:var(--text-dim);line-height:1.45;display:flex;gap:8px;align-items:flex-start}
   .post .aulas li::before{content:counter(aula,decimal-leading-zero);counter-increment:aula;font-family:'Kode Mono',monospace;font-size:10px;color:var(--text-mute);letter-spacing:0.06em;padding-top:2px;min-width:18px}
   .modulos-aviso{margin:40px 0 0;font-family:'Kode Mono',monospace;font-size:12px;color:var(--text-mute);text-align:center;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -496,7 +530,7 @@
   .faq-item.open .faq-q .plus{transform:rotate(45deg);color:var(--accent)}
   .faq-a{display:grid;grid-template-rows:0fr;overflow:hidden;transition:grid-template-rows .3s ease,padding .3s ease;padding:0 24px;color:var(--text-dim);font-size:14px;line-height:1.6}
   .faq-a > div{min-height:0}
-  .faq-item.open .faq-a{grid-template-rows:1fr;padding:0 24px 22px}
+  .faq-item.open .faq-a{grid-template-rows:1fr;padding:16px 24px 22px}
 
   /* CTA FINAL */
   .cta-final{text-align:center;padding:120px 24px;border:1px solid var(--border);border-radius:24px;background:radial-gradient(ellipse at center,rgba(212,245,66,0.06),transparent 60%),var(--bg-soft);margin:80px auto;max-width:var(--max)}
@@ -525,6 +559,50 @@
   .foot-socials a:hover{color:var(--text)}
   .foot-socials a:hover .ico{border-color:var(--accent);background:rgba(212,245,66,0.06)}
   .foot-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-size:12px;color:var(--text-mute);flex-wrap:wrap;gap:16px}
+  /* ===== Footer v3 ===== */
+  .footer-final{background:var(--bg);padding:96px 0 0;border-top:none;position:relative}
+  /* Badge sobrepondo a divisão entre a seção de valor e o container #242424 */
+  .footer-final .badge-wrap{position:relative;z-index:2;margin-bottom:-110px}
+  /* Container (#242424) em volta da comunidade e do footer */
+  .foot-wrap{background:#242424;padding:170px 0 40px;position:relative;z-index:1}
+  /* Aviso circular + pattern do logo + coração */
+  .badge-circular{position:relative;width:210px;height:210px;margin:0 auto;display:flex;align-items:center;justify-content:center}
+  .badge-ring{position:absolute;inset:0;width:100%;height:100%;animation:badge-spin 24s linear infinite}
+  .badge-ring text{fill:var(--accent);font-family:'Kode Mono',monospace;font-size:20px;font-weight:600;letter-spacing:1px}
+  @keyframes badge-spin{to{transform:rotate(360deg)}}
+  .badge-core{position:relative;width:110px;height:110px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+  .badge-core .stripes{position:absolute;inset:0;display:block}
+  .badge-core .stripes img{width:100%;height:100%;display:block}
+  .badge-heart{position:relative;z-index:2;font-size:38px;line-height:1;animation:badge-heart 1.5s ease-in-out infinite;filter:drop-shadow(0 0 9px rgba(212,245,66,0.55))}
+  @keyframes badge-heart{0%,100%{transform:scale(1)}10%{transform:scale(1.22)}20%{transform:scale(.97)}32%{transform:scale(1.13)}45%{transform:scale(1)}}
+  @media (prefers-reduced-motion:reduce){.badge-ring{animation:none}.badge-heart{animation:none}}
+  /* Comunidade mais plural */
+  .community{max-width:700px;margin:0 auto;padding:0 0 96px;text-align:left}
+  .community .kicker{display:block;font-family:'Kode Mono',monospace;font-size:16px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-mute);margin-bottom:18px}
+  .community h2{font-size:clamp(28px,4vw,36px);font-weight:900;letter-spacing:-0.02em;line-height:1.15;color:var(--text);margin:0 0 20px}
+  .community h2 .accent{color:var(--accent)}
+  .community p{color:var(--text-dim);font-size:16px;line-height:1.65;margin:0 0 24px}
+  .community ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin:0 0 30px}
+  .community li{color:var(--text-dim);font-size:14px;line-height:1.5;padding-left:18px;position:relative}
+  .community li::before{content:'';position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+  .community-mail{display:inline-block;font-family:'Kode Mono',monospace;font-size:13px;letter-spacing:0.04em;color:var(--accent);border:1px solid var(--border-light);padding:11px 16px;border-radius:8px;transition:all .2s;background:var(--bg-soft)}
+  .community-mail:hover{border-color:var(--accent);background:rgba(212,245,66,0.05)}
+  /* Footer card invertido (verde) */
+  .foot-card{background:var(--accent);color:#1c1c1c;border-radius:24px;padding:56px 0 36px;position:relative;margin:0 40px}
+  .foot-card .foot-inner{display:flex;justify-content:space-between;align-items:flex-start;gap:48px;flex-wrap:wrap}
+  .foot-card .foot-brand{max-width:300px}
+  .foot-card .foot-brand .logo-mark img,.foot-card .foot-brand .logo-text img{filter:brightness(0)}
+  .foot-card .foot-brand p{color:#2c2c1f;font-size:13px;margin-top:14px;line-height:1.5}
+  .foot-card .foot-cols{display:flex;gap:64px;flex-wrap:wrap}
+  .foot-card .foot-col h5{font-family:'Kode Mono',monospace;font-size:10px;color:#3a3a26;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:16px}
+  .foot-card .foot-col a{display:block;font-size:13px;color:#1c1c1c;padding:5px 0;transition:opacity .2s}
+  .foot-card .foot-col a:hover{opacity:.6}
+  .foot-card .foot-socials{display:flex;flex-direction:column;gap:8px;padding-top:0}
+  .foot-card .foot-socials a{display:inline-flex;align-items:center;gap:10px;padding:5px 0;color:#1c1c1c;font-size:13px;transition:opacity .2s;width:fit-content}
+  .foot-card .foot-socials a .ico{width:24px;height:24px;border-radius:6px;background:#1c1c1c;border:none;display:inline-flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0}
+  .foot-card .foot-socials a:hover{opacity:.65}
+  .foot-card .foot-bottom{display:flex;justify-content:flex-start;align-items:center;margin-top:48px;padding-top:24px;border-top:1px solid rgba(28,28,28,0.18);font-size:12px;color:#2c2c1f;flex-wrap:wrap;gap:16px}
+  @media (max-width:720px){.foot-card{padding:36px 0 28px;margin:0 16px}.community{padding-bottom:64px}.foot-wrap{padding:150px 0 16px}}
   .socials{display:flex;gap:10px}
   .socials a{width:32px;height:32px;border:1px solid var(--border-light);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--text-dim);transition:all .2s}
   .socials a:hover{color:var(--accent);border-color:var(--accent)}
@@ -735,7 +813,7 @@
       </div>
       <div class="int-card" data-top='[{"slug":"nextdotjs","src":"si","white":true},{"slug":"react","src":"si"},{"slug":"supabase","src":"si"}]'>
         <h4>Dados &amp; Estado</h4>
-        <p style="font-size:13px;color:var(--text-dim);margin-bottom:14px">Banco real e mocks que mentem bem.</p>
+        <p style="font-size:13px;color:var(--text-dim);margin-bottom:14px">Banco de dados e conteúdo real</p>
         <div class="int-logos" data-stack='[{"name":"Next.js","slug":"nextdotjs","src":"si"},{"name":"React","slug":"react","src":"si"},{"name":"Supabase","slug":"supabase","src":"si"},{"name":"Faker.js","slug":"faker","src":"si"},{"name":"MSW","slug":"mockserviceworker","src":"si"}]'></div>
       </div>
       <div class="int-card" data-top='[{"slug":"anthropic","src":"lobe","white":true},{"slug":"openai","src":"lobe","white":true}]'>
@@ -764,7 +842,6 @@
         <div class="post-meta"><span>MÓDULO 01</span><span class="post-tag is-ready">✓ PRONTO</span></div>
         <div class="post-thumb"><img src="thumb_modulo_01.png" alt="" width="1280" height="720" loading="lazy"/></div>
         <h3>Princípios e framework</h3>
-        <p>Os 4 níveis de protótipo. O framework de decisão das 5 perguntas. Os 3 erros clássicos de quem prototipa com IA.</p>
         <ul class="aulas">
           <li>O que são os Protótipos Funcionais</li>
           <li>Como a história trouxe a gente da máquina até o código</li>
@@ -773,26 +850,24 @@
           <li>Protótipos Interativos X Protótipos Funcionais</li>
           <li>4 erros de usar IA no processo de design (que não vamos cometer)</li>
         </ul>
-        <a href="#introVideo" class="post-cta">Assistir a introdução <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#" class="post-cta" data-lesson="FF70QZek-5E">Assistir a primeira aula <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
       <div class="post">
-        <div class="post-meta"><span>MÓDULO 02</span><span class="post-tag is-ready">✓ PRONTO</span></div>
-        <div class="post-thumb"><img src="thumb02.png" alt="" width="1280" height="720" loading="lazy"/></div>
+        <div class="post-meta"><span>MÓDULO 02</span><span class="post-tag is-next">PRÓXIMO</span></div>
+        <div class="post-thumb"></div>
         <h3>Componentes funcionais</h3>
-        <p>Tabela complexa, drag-and-drop, motion com feedback. Tudo no Figma Make. Do zero até um componente funcional.</p>
         <ul class="aulas">
           <li>Panorama das ferramentas opinativas</li>
           <li>Componente 1: tabela com filtros</li>
           <li>Componente 2: drag and drop</li>
           <li>Componente 3: feedback dinâmico</li>
         </ul>
-        <a href="#introVideo" class="post-cta">Assistir a introdução <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <span class="post-cta is-disabled">Em breve</span>
       </div>
       <div class="post">
-        <div class="post-meta"><span>MÓDULO 03</span><span class="post-tag is-producing">EM PRODUÇÃO</span></div>
-        <div class="post-thumb"><img src="thumb03.png" alt="" width="1280" height="720" loading="lazy"/></div>
+        <div class="post-meta"><span>MÓDULO 03</span><span class="post-tag is-next">PRÓXIMO</span></div>
+        <div class="post-thumb"></div>
         <h3>Fluxos completos com agentes de código</h3>
-        <p>Agora vamos usar agentes de código e criar jornadas inteiras. Estado em três níveis: memória, sessão e banco. Quando subir cada degrau sem virar overengineering.</p>
         <ul class="aulas">
           <li>Setup do ambiente</li>
           <li>O repositório base e a primeira tela</li>
@@ -803,10 +878,9 @@
         <span class="post-cta is-disabled">Em breve</span>
       </div>
       <div class="post">
-        <div class="post-meta"><span>MÓDULO 04</span><span class="post-tag is-producing">EM PRODUÇÃO</span></div>
+        <div class="post-meta"><span>MÓDULO 04</span><span class="post-tag is-next">PRÓXIMO</span></div>
         <div class="post-thumb"></div>
         <h3>Dados de teste e estados visuais</h3>
-        <p>Faker.js com dados BR. Admin pra criar perfis de teste. Overlay que troca entre vazio, cheio, loading e erro com um clique.</p>
         <ul class="aulas">
           <li>Por que dado mock importa</li>
           <li>Faker.js: dados realistas em escala</li>
@@ -820,7 +894,6 @@
         <div class="post-meta"><span>MÓDULO 05</span><span class="post-tag is-next">PRÓXIMO</span></div>
         <div class="post-thumb"></div>
         <h3>Features de IA e integrações</h3>
-        <p>Chamar Claude ou OpenAI direto do protótipo. Streaming, custo, fallback. APIs públicas como ViaCEP. Pensar features de IA e não telas de IA.</p>
         <ul class="aulas">
           <li>Features de IA, não telas de IA</li>
           <li>LLM API: criando uma feature de IA que funciona</li>
@@ -835,7 +908,6 @@
         <div class="post-meta"><span>MÓDULO 06</span><span class="post-tag is-next">PRÓXIMO</span></div>
         <div class="post-thumb"></div>
         <h3>Build, deploy e mobile</h3>
-        <p>Protótipo em produção em 5 min. QR code com perfil de teste embutido. Responsive sem dor. Documentação do caso de uso do curso.</p>
         <ul class="aulas">
           <li>Build local e otimização</li>
           <li>Deploy na Vercel</li>
@@ -949,16 +1021,6 @@
         </div>
       </div>
     </div>
-    <div class="inclusion">
-      <h3>Uma comunidade de design mais plural</h3>
-      <p>Design fica melhor quando a sala tem mais vozes diferentes. Se você se encaixa em um (ou mais) desses contextos e o valor é uma barreira, me escreve que a gente conversa:</p>
-      <ul>
-        <li>Estudante de design fora do mercado</li>
-        <li>Pessoa em transição de carreira para design</li>
-        <li>Pessoa negra, indígena, trans, travesti ou PCD</li>
-      </ul>
-      <a class="inclusion-mail" href="mailto:contato@prototipofuncional.com.br">contato@prototipofuncional.com.br</a>
-    </div>
   </div>
 </section>
 
@@ -973,37 +1035,87 @@
 </div>
 </main>
 
-<footer>
-  <div class="container">
-    <div class="foot-inner">
-      <div class="foot-brand">
-        <a href="#" class="logo"><span class="logo-mark"><img src="logo-prototipo-funcional.svg" alt="" aria-hidden="true" /></span><span class="logo-text"><img src="logo-prototipo-funcional.svg" alt="Protótipo Funcional" /></span></a>
-        <p>Para pessoas que querem construir experiências reais</p>
+<footer class="footer-final">
+  <div class="container badge-wrap">
+    <!-- Aviso circular: texto girando em volta do logo circular, com coração animado -->
+    <div class="badge-circular">
+      <svg class="badge-ring" viewBox="0 0 210 210" aria-hidden="true">
+        <defs><path id="v3ring" d="M105,105 m-64,0 a64,64 0 1,1 128,0 a64,64 0 1,1 -128,0"/></defs>
+        <text><textPath href="#v3ring" startOffset="0" textLength="402" lengthAdjust="spacing">SEMPRE PODEMOS FAZER MAIS • BORA? • </textPath></text>
+      </svg>
+      <div class="badge-core">
+        <span class="stripes"><img src="logo-circular.svg" alt="" aria-hidden="true" /></span>
+        <span class="badge-heart" role="img" aria-label="coração">💚</span>
       </div>
-      <div class="foot-cols">
-        <div class="foot-col">
-          <h5>Curso</h5>
-          <a href="#quem-faz">Sobre</a><a href="#modulos">Módulos</a><a href="#faq">FAQ</a><a href="#investimento">Investimento</a>
+    </div>
+  </div>
+
+  <!-- Container (#242424) em volta da comunidade e do footer -->
+  <div class="foot-wrap">
+   <div class="container">
+    <!-- Comunidade mais plural -->
+    <div class="community">
+      <span class="kicker">Vamos juntos promover</span>
+      <h2>Uma comunidade de <span class="accent">design mais plural</span></h2>
+      <p>Design fica melhor quando a sala tem mais vozes diferentes. Se você se encaixa em um (ou mais) desses contextos e o valor é uma barreira, me escreve que a gente conversa:</p>
+      <ul>
+        <li>Estudante de design fora do mercado</li>
+        <li>Pessoa em transição de carreira para design</li>
+        <li>Pessoa negra, indígena, trans, travesti ou PCD</li>
+      </ul>
+      <a class="community-mail" href="mailto:contato@prototipofuncional.com.br">contato@prototipofuncional.com.br</a>
+    </div>
+   </div>
+
+    <!-- Footer invertido (verde): largura quase total do site, com margem lateral e inferior -->
+    <div class="foot-card">
+     <div class="container">
+      <div class="foot-inner">
+        <div class="foot-brand">
+          <a href="#" class="logo"><span class="logo-mark"><img src="logo-prototipo-funcional.svg" alt="" aria-hidden="true" /></span><span class="logo-text"><img src="logo-prototipo-funcional.svg" alt="Protótipo Funcional" /></span></a>
+          <p>Para pessoas que querem construir experiências reais</p>
         </div>
-        <div class="foot-col">
-          <h5>Nas redes</h5>
-          <div class="foot-socials">
-            <a href="https://linkedin.com/in/nandadias" target="_blank" rel="noopener"><span class="ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.555v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.284zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.017H3.555V9h3.564v11.45z"/></svg></span><span class="label">LinkedIn</span></a>
-            <a href="https://www.youtube.com/@nandadiasdesign" target="_blank" rel="noopener"><span class="ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.546 15.568V8.432L15.818 12l-6.272 3.568z"/></svg></span><span class="label">YouTube</span></a>
-            <a href="https://www.tiktok.com/@nandadiasdesign" target="_blank" rel="noopener"><span class="ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005.8 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.84-.1z"/></svg></span><span class="label">TikTok</span></a>
-            <a href="https://x.com/nandadiasdesign" target="_blank" rel="noopener"><span class="ico"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></span><span class="label">X</span></a>
+        <div class="foot-cols">
+          <div class="foot-col">
+            <h5>Curso</h5>
+            <a href="#quem-faz">Sobre</a><a href="#modulos">Módulos</a><a href="#faq">FAQ</a><a href="#investimento">Investimento</a>
+          </div>
+          <div class="foot-col">
+            <h5>Nas redes</h5>
+            <div class="foot-socials">
+              <a href="https://linkedin.com/in/nandadias" target="_blank" rel="noopener"><span class="ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.555v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.268 2.37 4.268 5.455v6.284zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.017H3.555V9h3.564v11.45z"/></svg></span><span class="label">LinkedIn</span></a>
+              <a href="https://www.youtube.com/@nandadiasdesign" target="_blank" rel="noopener"><span class="ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.546 15.568V8.432L15.818 12l-6.272 3.568z"/></svg></span><span class="label">YouTube</span></a>
+              <a href="https://www.tiktok.com/@nandadiasdesign" target="_blank" rel="noopener"><span class="ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005.8 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.84-.1z"/></svg></span><span class="label">TikTok</span></a>
+              <a href="https://x.com/nandadiasdesign" target="_blank" rel="noopener"><span class="ico"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></span><span class="label">X</span></a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="foot-bottom">
-      <div>Construído com 🫶 e IA © 2026 Laboratório DesignIA · Nanda Dias · CNPJ 26.184.794/0001-84 · contato@prototipofuncional.com.br</div>
+      <div class="foot-bottom">
+        <div>Construído com 💚 e IA © 2026 Laboratório DesignIA · Nanda Dias · CNPJ 26.184.794/0001-84 · contato@prototipofuncional.com.br</div>
+      </div>
+     </div>
     </div>
   </div>
 </footer>
 
 <script>
 document.addEventListener('DOMContentLoaded',()=>{
+  // Sons de clique — apenas em CTAs e vídeos
+  const soundSel='.btn, .post-cta, .faq-q, [data-video-id], .fv-card, #introVideo';
+  const sndDown=new Audio('mouse-down.wav');
+  const sndUp=new Audio('mouse-up.wav');
+  sndDown.preload='auto';sndUp.preload='auto';sndDown.volume=0.55;sndUp.volume=0.55;
+  const playSnd=a=>{try{a.currentTime=0;a.play().catch(()=>{})}catch(e){}};
+  let sndArmed=false;
+  document.addEventListener('mousedown',e=>{
+    if(e.button!==0||!e.target.closest)return;
+    if(e.target.closest(soundSel)){sndArmed=true;playSnd(sndDown)}
+  },{passive:true});
+  document.addEventListener('mouseup',()=>{
+    if(sndArmed){sndArmed=false;playSnd(sndUp)}
+  },{passive:true});
+
   const cursor=document.querySelector('.cursor');
   const canHover=matchMedia('(hover:hover) and (pointer:fine)').matches;
   const reduceMotion=matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -1030,6 +1142,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     };
     document.addEventListener('mouseover',e=>{
       if(!e.target.closest)return;
+      cursor.classList.toggle('is-dark',!!e.target.closest('.foot-card'));
       const playEl=e.target.closest(playSel);
       if(playEl){setPlayState(playEl);return}
       if(e.target.closest(interactiveSel))cursor.classList.add('is-hover');
@@ -1299,14 +1412,12 @@ document.addEventListener('DOMContentLoaded',()=>{
     io.observe(hl);
   }
 
-  const videoTrigger=document.querySelector('#introVideo');
   const videoModal=document.querySelector('#videoModal');
-  if(videoTrigger&&videoModal){
+  if(videoModal){
     const stage=videoModal.querySelector('.video-modal-stage');
     const closeBtn=videoModal.querySelector('.video-modal-close');
-    const openVideo=()=>{
+    const openVideo=id=>{
       if(videoModal.classList.contains('open'))return;
-      const id=videoTrigger.dataset.videoId;
       const iframe=document.createElement('iframe');
       iframe.src=`https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
       iframe.setAttribute('allow','autoplay; encrypted-media; fullscreen; picture-in-picture');
@@ -1321,11 +1432,44 @@ document.addEventListener('DOMContentLoaded',()=>{
       const iframe=stage.querySelector('iframe');
       if(iframe)iframe.remove();
     };
-    videoTrigger.addEventListener('click',openVideo);
-    videoTrigger.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openVideo()}});
+    document.querySelectorAll('[data-video-id]').forEach(trigger=>{
+      trigger.addEventListener('click',e=>{e.preventDefault();openVideo(trigger.dataset.videoId)});
+      trigger.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openVideo(trigger.dataset.videoId)}});
+    });
     closeBtn.addEventListener('click',closeVideo);
     videoModal.addEventListener('click',e=>{if(e.target===videoModal)closeVideo()});
     document.addEventListener('keydown',e=>{if(e.key==='Escape'&&videoModal.classList.contains('open'))closeVideo()});
+  }
+
+  // Modal ambiente de aula (aula gratuita)
+  const lessonModal=document.querySelector('#lessonModal');
+  if(lessonModal){
+    const lStage=lessonModal.querySelector('.lesson-stage');
+    const lClose=lessonModal.querySelector('.lesson-close');
+    const openLesson=id=>{
+      if(lessonModal.classList.contains('open'))return;
+      const iframe=document.createElement('iframe');
+      iframe.src=`https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
+      iframe.setAttribute('allow','autoplay; encrypted-media; fullscreen; picture-in-picture');
+      iframe.setAttribute('allowfullscreen','');
+      lStage.appendChild(iframe);
+      lessonModal.classList.add('open');
+      document.body.style.overflow='hidden';
+    };
+    const closeLesson=()=>{
+      lessonModal.classList.remove('open');
+      document.body.style.overflow='';
+      const f=lStage.querySelector('iframe');if(f)f.remove();
+    };
+    document.querySelectorAll('[data-lesson]').forEach(t=>{
+      t.addEventListener('click',e=>{e.preventDefault();openLesson(t.dataset.lesson)});
+      t.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openLesson(t.dataset.lesson)}});
+    });
+    lClose.addEventListener('click',closeLesson);
+    lessonModal.addEventListener('click',e=>{if(e.target===lessonModal)closeLesson()});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&lessonModal.classList.contains('open'))closeLesson()});
+    const accessCta=lessonModal.querySelector('[data-lesson-cta]');
+    if(accessCta)accessCta.addEventListener('click',closeLesson);
   }
 
   // Lead capture modal → Brevo → Hotmart
@@ -1473,6 +1617,61 @@ document.addEventListener('DOMContentLoaded',()=>{
 <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Vídeo de apresentação">
   <div class="video-modal-stage">
     <button class="video-modal-close" type="button" aria-label="Fechar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+  </div>
+</div>
+
+<!-- Modal ambiente de aula (aula gratuita do Módulo 1) -->
+<div class="lesson-modal" id="lessonModal" role="dialog" aria-modal="true" aria-label="Aula gratuita — Módulo 1">
+  <div class="lesson-shell">
+    <button class="lesson-close" type="button" aria-label="Fechar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    <div class="lesson-mhead"><span class="lesson-mhead-title">Módulo 01 · Princípios e framework</span></div>
+    <aside class="lesson-side">
+      <div class="lesson-side-head">
+        <span class="lesson-eyebrow">Módulo 01</span>
+        <h3>Princípios e framework</h3>
+        <p>Aula 1 de 6 · amostra gratuita</p>
+      </div>
+      <ul class="lesson-list">
+        <li class="lesson-item is-active">
+          <span class="li-num">01</span>
+          <span class="li-title">O que são os Protótipos Funcionais</span>
+          <span class="li-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+        </li>
+        <li class="lesson-item is-locked">
+          <span class="li-num">02</span>
+          <span class="li-title">Como a história trouxe a gente da máquina até o código</span>
+          <span class="li-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span>
+        </li>
+        <li class="lesson-item is-locked">
+          <span class="li-num">03</span>
+          <span class="li-title">Por que usar código para fazer design &amp; não vamos abandonar o Figma</span>
+          <span class="li-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span>
+        </li>
+        <li class="lesson-item is-locked">
+          <span class="li-num">04</span>
+          <span class="li-title">Os 4 níveis de protótipos</span>
+          <span class="li-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span>
+        </li>
+        <li class="lesson-item is-locked">
+          <span class="li-num">05</span>
+          <span class="li-title">Protótipos Interativos X Protótipos Funcionais</span>
+          <span class="li-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span>
+        </li>
+        <li class="lesson-item is-locked">
+          <span class="li-num">06</span>
+          <span class="li-title">4 erros de usar IA no processo de design (que não vamos cometer)</span>
+          <span class="li-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span>
+        </li>
+      </ul>
+      <div class="lesson-side-foot">
+        <span class="lf-note"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>As demais aulas são exclusivas para alunos</span>
+        <a href="#investimento" class="btn btn-primary" data-lesson-cta>Quero ter acesso</a>
+      </div>
+    </aside>
+    <div class="lesson-main">
+      <div class="lesson-stage"></div>
+      <div class="lesson-bar"><strong>O que são os Protótipos Funcionais</strong><span class="free-badge">Aula gratuita</span></div>
+    </div>
   </div>
 </div>
 
