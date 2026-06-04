@@ -329,6 +329,9 @@
   .lesson-item.is-active{background:rgba(212,245,66,0.12);color:var(--text)}
   .lesson-item.is-active .li-num,.lesson-item.is-active .li-ico{color:var(--accent)}
   .lesson-item.is-locked .li-title{opacity:.65}
+  .lesson-item.is-free{cursor:pointer}
+  .lesson-item.is-free:hover{background:rgba(212,245,66,0.07)}
+  .lesson-item .li-free{align-self:flex-start;font-family:'Kode Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;background:var(--accent);color:#1c1c1c;padding:2px 6px;border-radius:999px;font-weight:700;white-space:nowrap;margin-top:1px}
   .lesson-side-foot{padding:18px 20px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:14px}
   .lesson-side-foot .lf-note{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--text-mute);line-height:1.4}
   .lesson-side-foot .lf-note svg{flex-shrink:0;margin-top:1px}
@@ -1422,29 +1425,99 @@ document.addEventListener('DOMContentLoaded',()=>{
     document.addEventListener('keydown',e=>{if(e.key==='Escape'&&videoModal.classList.contains('open'))closeVideo()});
   }
 
-  // Modal ambiente de aula (aula gratuita)
+  // Modal ambiente de aula (amostra gratuita) — conteúdo por módulo
+  const MODULES={
+    '1':{num:'01',title:'Princípios e framework',lessons:[
+      {t:'O que são os Protótipos Funcionais',v:'FF70QZek-5E',free:true},
+      {t:'Como a história trouxe a gente da máquina até o código'},
+      {t:'Por que usar código para fazer design & não vamos abandonar o Figma'},
+      {t:'Os 4 níveis de protótipos'},
+      {t:'Protótipos Interativos X Protótipos Funcionais'},
+      {t:'4 erros de usar IA no processo de design (que não vamos cometer)'}
+    ]},
+    '2':{num:'02',title:'Componentes funcionais',lessons:[
+      {t:'Ferramentas Opinativas, Harness e Custos'},
+      {t:'Os componentes do módulo: tabela dinâmica e player de áudio',v:'-KFh0qm6p50',free:true},
+      {t:'Interface de criação do Make e preparando o design'},
+      {t:'Prompt estrutural, React e array de dados'},
+      {t:'Interface de edição do Make'},
+      {t:'Ajustando a estrutura do protótipo no código e usando Cloudinary'},
+      {t:'Busca e filtros na tabela'},
+      {t:'Seleção e ações em massa'},
+      {t:'Edição inline e persistência com LocalStorage'},
+      {t:'Fechamento da tabela e desafio de ordenação'},
+      {t:'Conhecendo o v0'},
+      {t:'Player de áudio: estrutura e áudio real'},
+      {t:'Scrubber e controle de volume'},
+      {t:'Fila, troca de faixa, shuffle e repeat'},
+      {t:'Like, expandir/colapsar e estados visuais'},
+      {t:'Onde as ferramentas opinativas travam (ponte pro Módulo 3)'}
+    ]}
+  };
+  const ICON_LOCK='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>';
   const lessonModal=document.querySelector('#lessonModal');
   if(lessonModal){
     const lStage=lessonModal.querySelector('.lesson-stage');
     const lClose=lessonModal.querySelector('.lesson-close');
-    const openLesson=id=>{
-      if(lessonModal.classList.contains('open'))return;
+    const lList=lessonModal.querySelector('.lesson-list');
+    const lEyebrow=lessonModal.querySelector('.lesson-eyebrow');
+    const lHeadTitle=lessonModal.querySelector('.lesson-side-head h3');
+    const lHeadSub=lessonModal.querySelector('.lesson-side-head p');
+    const lMhead=lessonModal.querySelector('.lesson-mhead-title');
+    const lBar=lessonModal.querySelector('.lesson-bar strong');
+    const playLesson=id=>{
+      const old=lStage.querySelector('iframe');if(old)old.remove();
       const iframe=document.createElement('iframe');
       iframe.src=`https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
       iframe.setAttribute('allow','autoplay; encrypted-media; fullscreen; picture-in-picture');
       iframe.setAttribute('allowfullscreen','');
       lStage.appendChild(iframe);
-      lessonModal.classList.add('open');
-      document.body.style.overflow='hidden';
+    };
+    const selectItem=li=>{
+      lList.querySelectorAll('.lesson-item').forEach(x=>x.classList.remove('is-active'));
+      li.classList.add('is-active');
+      if(lBar)lBar.textContent=li.querySelector('.li-title').textContent;
+      playLesson(li.dataset.lesson);
+    };
+    const renderModule=key=>{
+      const mod=MODULES[key];if(!mod)return;
+      const free=mod.lessons.filter(l=>l.free).length;
+      lEyebrow.textContent=`Módulo ${mod.num}`;
+      lHeadTitle.textContent=mod.title;
+      lHeadSub.textContent=`${free} de ${mod.lessons.length} ${free>1?'aulas gratuitas':'aula gratuita'} · amostra`;
+      lMhead.textContent=`Módulo ${mod.num} · ${mod.title}`;
+      lList.innerHTML='';
+      mod.lessons.forEach((l,i)=>{
+        const li=document.createElement('li');
+        li.className='lesson-item'+(l.free?' is-free':' is-locked');
+        if(l.free)li.dataset.lesson=l.v;
+        const num=String(i+1).padStart(2,'0');
+        li.innerHTML=`<span class="li-num">${num}</span><span class="li-title"></span>${l.free?'<span class="li-free">Gratuita</span>':`<span class="li-ico">${ICON_LOCK}</span>`}`;
+        li.querySelector('.li-title').textContent=l.t;
+        if(l.free)li.addEventListener('click',()=>selectItem(li));
+        lList.appendChild(li);
+      });
+      const first=lList.querySelector('.lesson-item.is-free');
+      if(first){first.classList.add('is-active');if(lBar)lBar.textContent=first.querySelector('.li-title').textContent;}
+    };
+    const openLesson=key=>{
+      const mod=MODULES[key];if(!mod)return;
+      renderModule(key);
+      if(!lessonModal.classList.contains('open')){
+        lessonModal.classList.add('open');
+        document.body.style.overflow='hidden';
+      }
+      const first=lList.querySelector('.lesson-item.is-free');
+      if(first)playLesson(first.dataset.lesson);
     };
     const closeLesson=()=>{
       lessonModal.classList.remove('open');
       document.body.style.overflow='';
       const f=lStage.querySelector('iframe');if(f)f.remove();
     };
-    document.querySelectorAll('[data-lesson]').forEach(t=>{
-      t.addEventListener('click',e=>{e.preventDefault();openLesson(t.dataset.lesson)});
-      t.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openLesson(t.dataset.lesson)}});
+    document.querySelectorAll('.post-cta[data-module]').forEach(t=>{
+      t.addEventListener('click',e=>{e.preventDefault();openLesson(t.dataset.module)});
+      t.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openLesson(t.dataset.module)}});
     });
     lClose.addEventListener('click',closeLesson);
     lessonModal.addEventListener('click',e=>{if(e.target===lessonModal)closeLesson()});
@@ -1601,49 +1674,18 @@ document.addEventListener('DOMContentLoaded',()=>{
   </div>
 </div>
 
-<!-- Modal ambiente de aula (aula gratuita do Módulo 1) -->
-<div class="lesson-modal" id="lessonModal" role="dialog" aria-modal="true" aria-label="Aula gratuita — Módulo 1">
+<!-- Modal ambiente de aula (amostra gratuita) -->
+<div class="lesson-modal" id="lessonModal" role="dialog" aria-modal="true" aria-label="Aula gratuita">
   <div class="lesson-shell">
     <button class="lesson-close" type="button" aria-label="Fechar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
-    <div class="lesson-mhead"><span class="lesson-mhead-title">Módulo 01 · Princípios e framework</span></div>
+    <div class="lesson-mhead"><span class="lesson-mhead-title"></span></div>
     <aside class="lesson-side">
       <div class="lesson-side-head">
-        <span class="lesson-eyebrow">Módulo 01</span>
-        <h3>Princípios e framework</h3>
-        <p>Aula 1 de 6 · amostra gratuita</p>
+        <span class="lesson-eyebrow"></span>
+        <h3></h3>
+        <p></p>
       </div>
-      <ul class="lesson-list">
-        <li class="lesson-item is-active">
-          <span class="li-num">01</span>
-          <span class="li-title">O que são os Protótipos Funcionais</span>
-          <span class="li-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
-        </li>
-        <li class="lesson-item is-locked">
-          <span class="li-num">02</span>
-          <span class="li-title">Como a história trouxe a gente da máquina até o código</span>
-          <span class="li-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span>
-        </li>
-        <li class="lesson-item is-locked">
-          <span class="li-num">03</span>
-          <span class="li-title">Por que usar código para fazer design &amp; não vamos abandonar o Figma</span>
-          <span class="li-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span>
-        </li>
-        <li class="lesson-item is-locked">
-          <span class="li-num">04</span>
-          <span class="li-title">Os 4 níveis de protótipos</span>
-          <span class="li-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span>
-        </li>
-        <li class="lesson-item is-locked">
-          <span class="li-num">05</span>
-          <span class="li-title">Protótipos Interativos X Protótipos Funcionais</span>
-          <span class="li-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span>
-        </li>
-        <li class="lesson-item is-locked">
-          <span class="li-num">06</span>
-          <span class="li-title">4 erros de usar IA no processo de design (que não vamos cometer)</span>
-          <span class="li-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span>
-        </li>
-      </ul>
+      <ul class="lesson-list"></ul>
       <div class="lesson-side-foot">
         <span class="lf-note"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>As demais aulas são exclusivas para alunos</span>
         <a href="#investimento" class="btn btn-primary" data-lesson-cta>Quero ter acesso</a>
@@ -1651,7 +1693,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     </aside>
     <div class="lesson-main">
       <div class="lesson-stage"></div>
-      <div class="lesson-bar"><strong>O que são os Protótipos Funcionais</strong><span class="free-badge">Aula gratuita</span></div>
+      <div class="lesson-bar"><strong></strong><span class="free-badge">Aula gratuita</span></div>
     </div>
   </div>
 </div>
