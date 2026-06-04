@@ -42,6 +42,9 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Kode+Mono:wght@400;500;600;700&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Kode+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+<!-- Lottie player (emojis animados Noto) -->
+<script defer src="https://unpkg.com/@lottiefiles/lottie-player@2.0.12/dist/lottie-player.js"></script>
+
 <!-- Schema.org Course -->
 <script type="application/ld+json">
 {
@@ -573,9 +576,8 @@
   .badge-core{position:relative;width:110px;height:110px;border-radius:50%;display:flex;align-items:center;justify-content:center}
   .badge-core .stripes{position:absolute;inset:0;display:block}
   .badge-core .stripes img{width:100%;height:100%;display:block}
-  .badge-heart{position:relative;z-index:2;font-size:38px;line-height:1;animation:badge-heart 1.5s ease-in-out infinite;filter:drop-shadow(0 0 9px rgba(212,245,66,0.55))}
-  @keyframes badge-heart{0%,100%{transform:scale(1)}10%{transform:scale(1.22)}20%{transform:scale(.97)}32%{transform:scale(1.13)}45%{transform:scale(1)}}
-  @media (prefers-reduced-motion:reduce){.badge-ring{animation:none}.badge-heart{animation:none}}
+  .badge-emoji{position:relative;z-index:2;width:54px;height:54px;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.45))}
+  @media (prefers-reduced-motion:reduce){.badge-ring{animation:none}}
   /* Comunidade mais plural */
   .community{max-width:700px;margin:0 auto;padding:0 0 96px;text-align:left}
   .community .kicker{display:block;font-family:'Kode Mono',monospace;font-size:16px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-mute);margin-bottom:18px}
@@ -814,7 +816,7 @@
       <div class="int-card" data-top='[{"slug":"nextdotjs","src":"si","white":true},{"slug":"react","src":"si"},{"slug":"supabase","src":"si"}]'>
         <h4>Dados &amp; Estado</h4>
         <p style="font-size:13px;color:var(--text-dim);margin-bottom:14px">Banco de dados e conteúdo real</p>
-        <div class="int-logos" data-stack='[{"name":"Next.js","slug":"nextdotjs","src":"si"},{"name":"React","slug":"react","src":"si"},{"name":"Supabase","slug":"supabase","src":"si"},{"name":"Faker.js","slug":"faker","src":"si"},{"name":"MSW","slug":"mockserviceworker","src":"si"}]'></div>
+        <div class="int-logos" data-stack='[{"name":"Next.js","slug":"nextdotjs","src":"si"},{"name":"React","slug":"react","src":"si"},{"name":"Supabase","slug":"supabase","src":"si"},{"name":"Faker.js","slug":"faker","src":"si"},{"name":"Cloudinary","slug":"cloudinary","src":"si"}]'></div>
       </div>
       <div class="int-card" data-top='[{"slug":"anthropic","src":"lobe","white":true},{"slug":"openai","src":"lobe","white":true}]'>
         <h4>IA &amp; Deploy</h4>
@@ -1045,7 +1047,7 @@
       </svg>
       <div class="badge-core">
         <span class="stripes"><img src="logo-circular.svg" alt="" aria-hidden="true" /></span>
-        <span class="badge-heart" role="img" aria-label="coração">💚</span>
+        <lottie-player class="badge-emoji" autoplay loop role="img" aria-label="amor pela comunidade" src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f49a/lottie.json"></lottie-player>
       </div>
     </div>
   </div>
@@ -1115,6 +1117,16 @@ document.addEventListener('DOMContentLoaded',()=>{
   document.addEventListener('mouseup',()=>{
     if(sndArmed){sndArmed=false;playSnd(sndUp)}
   },{passive:true});
+
+  // Emoji animado (Noto Lottie) alterna no badge
+  const badgeEmoji=document.querySelector('.badge-emoji');
+  if(badgeEmoji){
+    const base='https://fonts.gstatic.com/s/e/notoemoji/latest/';
+    const codes=['1f49a','1f918','1f917','1f308','1faf1_1f3fd_200d_1faf2_1f3ff','1f9be'];
+    let ei=0;
+    const swap=u=>{if(typeof badgeEmoji.load==='function')badgeEmoji.load(u);else badgeEmoji.setAttribute('src',u)};
+    setInterval(()=>{ei=(ei+1)%codes.length;swap(base+codes[ei]+'/lottie.json')},2600);
+  }
 
   const cursor=document.querySelector('.cursor');
   const canHover=matchMedia('(hover:hover) and (pointer:fine)').matches;
