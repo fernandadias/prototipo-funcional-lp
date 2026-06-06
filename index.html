@@ -318,6 +318,11 @@
   .lesson-close:hover{background:rgba(0,0,0,0.82)}
   .lesson-side{width:320px;flex-shrink:0;background:var(--bg-soft);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
   .lesson-side-head{padding:26px 24px 20px;border-bottom:1px solid var(--border)}
+  .lesson-modnav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:2px}
+  .lesson-modnav .lesson-eyebrow{flex:1;text-align:center}
+  .lmod-nav{flex-shrink:0;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--text-dim);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+  .lmod-nav:hover:not(:disabled){background:rgba(212,245,66,0.12);color:var(--accent);border-color:var(--accent)}
+  .lmod-nav:disabled{opacity:.28;cursor:default}
   .lesson-eyebrow{font-family:'Kode Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent)}
   .lesson-side-head h3{font-size:18px;font-weight:900;letter-spacing:-0.01em;margin:8px 0 6px;color:var(--text)}
   .lesson-side-head p{font-family:'Kode Mono',monospace;font-size:11px;letter-spacing:0.06em;color:var(--text-mute);text-transform:uppercase}
@@ -1465,6 +1470,10 @@ document.addEventListener('DOMContentLoaded',()=>{
     const lHeadSub=lessonModal.querySelector('.lesson-side-head p');
     const lMhead=lessonModal.querySelector('.lesson-mhead-title');
     const lBar=lessonModal.querySelector('.lesson-bar strong');
+    const lPrev=lessonModal.querySelector('.lmod-prev');
+    const lNext=lessonModal.querySelector('.lmod-next');
+    const MODULE_KEYS=Object.keys(MODULES);
+    let currentKey=null;
     const playLesson=id=>{
       const old=lStage.querySelector('iframe');if(old)old.remove();
       const iframe=document.createElement('iframe');
@@ -1479,8 +1488,15 @@ document.addEventListener('DOMContentLoaded',()=>{
       if(lBar)lBar.textContent=li.querySelector('.li-title').textContent;
       playLesson(li.dataset.lesson);
     };
+    const updateNav=()=>{
+      const i=MODULE_KEYS.indexOf(currentKey);
+      if(lPrev)lPrev.disabled=i<=0;
+      if(lNext)lNext.disabled=i>=MODULE_KEYS.length-1;
+    };
     const renderModule=key=>{
       const mod=MODULES[key];if(!mod)return;
+      currentKey=key;
+      updateNav();
       const free=mod.lessons.filter(l=>l.free).length;
       lEyebrow.textContent=`Módulo ${mod.num}`;
       lHeadTitle.textContent=mod.title;
@@ -1500,6 +1516,19 @@ document.addEventListener('DOMContentLoaded',()=>{
       const first=lList.querySelector('.lesson-item.is-free');
       if(first){first.classList.add('is-active');if(lBar)lBar.textContent=first.querySelector('.li-title').textContent;}
     };
+    const playFirstFree=()=>{
+      const first=lList.querySelector('.lesson-item.is-free');
+      if(first)playLesson(first.dataset.lesson);
+    };
+    const goModule=dir=>{
+      const i=MODULE_KEYS.indexOf(currentKey);
+      const next=MODULE_KEYS[i+dir];
+      if(!next)return;
+      renderModule(next);
+      playFirstFree();
+    };
+    if(lPrev)lPrev.addEventListener('click',()=>goModule(-1));
+    if(lNext)lNext.addEventListener('click',()=>goModule(1));
     const openLesson=key=>{
       const mod=MODULES[key];if(!mod)return;
       renderModule(key);
@@ -1507,8 +1536,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         lessonModal.classList.add('open');
         document.body.style.overflow='hidden';
       }
-      const first=lList.querySelector('.lesson-item.is-free');
-      if(first)playLesson(first.dataset.lesson);
+      playFirstFree();
     };
     const closeLesson=()=>{
       lessonModal.classList.remove('open');
@@ -1681,7 +1709,11 @@ document.addEventListener('DOMContentLoaded',()=>{
     <div class="lesson-mhead"><span class="lesson-mhead-title"></span></div>
     <aside class="lesson-side">
       <div class="lesson-side-head">
-        <span class="lesson-eyebrow"></span>
+        <div class="lesson-modnav">
+          <button class="lmod-nav lmod-prev" type="button" aria-label="Módulo anterior"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <span class="lesson-eyebrow"></span>
+          <button class="lmod-nav lmod-next" type="button" aria-label="Próximo módulo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
+        </div>
         <h3></h3>
         <p></p>
       </div>
