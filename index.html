@@ -1448,6 +1448,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       {t:'Interface de edição do Make'},
       {t:'Ajustando a estrutura do protótipo no código e usando Cloudinary'},
       {t:'Busca e filtros na tabela'},
+      {t:'Manipulação de dados: Estado vs. Persistência'},
       {t:'Seleção e ações em massa'},
       {t:'Edição inline e persistência com LocalStorage'},
       {t:'Fechamento da tabela e desafio de ordenação'},
@@ -1556,7 +1557,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
   // Lead capture modal → Brevo → Hotmart
   const HOTMART_URL='https://pay.hotmart.com/G106003864J?off=u44pgon3';
-  const BREVO_FORM_URL='';  // TODO: colar aqui a URL do form Brevo (ex: https://sibforms.com/serve/MUIFA...)
+  const BREVO_FORM_URL='https://4c5e69f2.sibforms.com/serve/MUIFAHixP8yVTeIvCXAUj_s9mvhkKhMgSa_bNLNa2xVCAkdEqNOf2Lpah44bhbvg9eDWFwCL2f7eWOgwUkZRcUPBn80qPGGns1xtXKn96GipeJoCPX2w3BC6RLaMmAGH6xf9iY-nu883XMV1dbL0BGzUg4koM_o6I_w309ij7jGnQFkqkhwXbnpFyfJML6a9YuIaqLqOGnf5U3iu';
   const leadModal=document.querySelector('#leadModal');
   const buyBtn=document.querySelector('#buyBtn');
   const leadForm=document.querySelector('#leadForm');
@@ -1564,8 +1565,8 @@ document.addEventListener('DOMContentLoaded',()=>{
     const closeBtn=leadModal.querySelector('.lead-modal-close');
     const errEl=leadForm.querySelector('.lead-form-err');
     const submitBtn=leadForm.querySelector('.lead-submit');
-    const emailInput=leadForm.querySelector('input[name="email"]');
-    const nameInput=leadForm.querySelector('input[name="name"]');
+    const emailInput=leadForm.querySelector('input[name="EMAIL"]');
+    const nameInput=leadForm.querySelector('input[name="NOME"]');
     let lastTrigger=null;
 
     const showError=msg=>{errEl.textContent=msg;errEl.hidden=false};
@@ -1607,9 +1608,9 @@ document.addEventListener('DOMContentLoaded',()=>{
       e.preventDefault();
       clearError();
       const data=new FormData(leadForm);
-      const email=(data.get('email')||'').toString().trim();
-      const name=(data.get('name')||'').toString().trim();
-      const phone=(data.get('phone')||'').toString().trim();
+      const email=(data.get('EMAIL')||'').toString().trim();
+      const name=(data.get('NOME')||'').toString().trim();
+      const phone=(data.get('TELEFONE')||'').toString().trim();
       if(!email){showError('Email é obrigatório');emailInput.focus();return}
       if(!isValidEmail(email)){showError('Digite um email válido');emailInput.focus();return}
 
@@ -1679,16 +1680,18 @@ document.addEventListener('DOMContentLoaded',()=>{
     <form class="lead-form" id="leadForm" novalidate>
       <label>
         <span class="lead-label">Nome</span>
-        <input name="name" type="text" autocomplete="name" maxlength="120"/>
+        <input name="NOME" type="text" autocomplete="name" maxlength="120"/>
       </label>
       <label>
         <span class="lead-label">Email<span class="req" aria-hidden="true">*</span></span>
-        <input name="email" type="email" required autocomplete="email" maxlength="160"/>
+        <input name="EMAIL" type="email" required autocomplete="email" maxlength="160"/>
       </label>
       <label>
         <span class="lead-label">WhatsApp</span>
-        <input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20"/>
+        <input name="TELEFONE" type="tel" inputmode="tel" autocomplete="tel" maxlength="20"/>
       </label>
+      <input type="hidden" name="locale" value="pt"/>
+      <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-5000px"/>
       <button class="btn btn-primary lead-submit" type="submit">Ir para o checkout</button>
       <p class="lead-form-err" role="alert" hidden></p>
       <p class="lead-form-note">Você será redirecionado para a Hotmart</p>
